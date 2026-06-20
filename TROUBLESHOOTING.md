@@ -56,3 +56,52 @@ This document records the specific issues, errors, and configuration roadblocks 
   // Correct Import:
   import tailwindcss from "@tailwindcss/vite";
   ```
+
+### 5. `jsconfig.json` Deprecated `baseUrl` Warning
+- **Problem:** VS Code highlights `baseUrl` in `jsconfig.json` with a warning stating that `'baseUrl' is deprecated and will stop functioning in TypeScript 7.0.`
+- **Cause:** In modern TypeScript/JS configuration guidelines (v6.0+), the `baseUrl` property is deprecated because module paths resolve relative to the configuration file root directly. Specifying `"baseUrl": "."` causes compile-time warnings.
+- **Solution:** Removed `"baseUrl": "."` from `jsconfig.json` and changed the path resolution targets to use relative formatting (prefixing with `./`):
+  ```json
+  {
+    "compilerOptions": {
+      "paths": {
+        "@/*": ["./src/*"]
+      }
+    },
+    "include": ["src/**/*"]
+  }
+  ```
+
+### 6. VS Code CSS Linter "Unknown at-rule" Warnings (`@theme`, `@utility`)
+- **Problem:** VS Code shows yellow/red warnings inside `globals.css` with message `Unknown at rule @theme` and `Unknown at rule @utility`.
+- **Cause:** VS Code has a built-in CSS validator that only recognizes standard W3C CSS at-rules. It flags custom at-rules introduced by Tailwind CSS v4 as errors/warnings.
+- **Solution:** Created a project-level VS Code configuration file (`.vscode/settings.json`) to tell the built-in linter to ignore unknown at-rules:
+  ```json
+  {
+    "css.lint.unknownAtRules": "ignore"
+  }
+  ```
+
+### 7. Tailwind CSS IntelliSense Canonical Class Warnings
+- **Problem:** VS Code's Tailwind CSS IntelliSense extension flags arbitrary values in class names (e.g. `h-[2px]` and `top-[73px]`) with warnings advising to write them as canonical scale classes.
+- **Cause:** Tailwind has a standard spacing scale (where `1 unit = 0.25rem = 4px`). The extension flags arbitrary values enclosed in square brackets `[...]` if there are equivalent classes on the spacing scale.
+- **Solution:** Updated the classes in `Navbar.jsx` to use their canonical scale equivalents:
+  - Replaced `h-[2px]` with `h-0.5` (since `0.5 * 4px = 2px`).
+  - Replaced `top-[73px]` with `top-18.25` (since `18.25 * 4px = 73px`).
+  - Replaced `h-[calc(100vh-73px)]` with `h-[calc(100vh-18.25rem)]` or `h-[calc(100vh-4.5625rem)]`? Actually, if `top-[73px]` is changed to `top-18.25`, we can keep `h-[calc(100vh-73px)]` or write it cleanly. Let's see what class works.
+
+### 8. Vite Path Alias Import Resolution Failure
+- **Problem:** The Vite dev server failed to resolve imports starting with `@/` (e.g. `Failed to resolve import "@/components" from "src/App.jsx"`).
+- **Cause:** A spelling typo in `vite.config.js` where the configuration key under `resolve` was written as `alis` instead of `alias`. Vite failed to process the path mapping object as a result.
+- **Solution:** Corrected the spelling in `vite.config.js` to `alias`:
+  ```javascript
+  resolve: {
+    alias: {
+      '@': path.resolve('./src'),
+    },
+  }
+  ```
+
+
+
+
