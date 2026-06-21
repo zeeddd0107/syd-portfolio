@@ -102,6 +102,17 @@ This document records the specific issues, errors, and configuration roadblocks 
   }
   ```
 
+### 9. PostCSS `@import` Ordering Error
+- **Problem:** Dev server fails to build with the error `[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)`.
+- **Cause:** The CSS specification states that all `@import` statements must reside at the very top of a CSS file. In `globals.css`, placing `@import "tailwindcss";` before a Google Font `@import url(...)` caused Tailwind's compiler to expand its resets and utilities *before* the font import, causing PostCSS to throw an ordering error.
+- **Solution:** Moved the Google Font `@import` declaration above the `@import "tailwindcss";` declaration.
+
+### 10. Missing Brand Icons in `lucide-react` v1.0.0+
+- **Problem:** Uncaught SyntaxError showing that `lucide-react` does not provide an export named `Github` (or `Linkedin`).
+- **Cause:** Starting in version 1.0.0, the Lucide project removed all corporate/brand logo icons for trademark compliance and design focus.
+- **Solution:** Created a custom React SVG icons component file (`src/components/ui/icons.jsx`) to export standalone `GithubIcon` and `LinkedinIcon` components, then updated `src/data/socialLinks.js` to import from this local file.
+
+
 
 
 

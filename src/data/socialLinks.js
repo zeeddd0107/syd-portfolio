@@ -1,15 +1,16 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/icons';
 
 export const socialLinks = [
   {
     name: 'GitHub',
     url: 'https://github.com/zeeddd0107',
-    icon: Github,
+    icon: GithubIcon,
   },
   {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/sydney-jimenez-53304a3aa/',
-    icon: Linkedin,
+    icon: LinkedinIcon,
   },
   {
     name: 'Email',
