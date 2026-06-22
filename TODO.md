@@ -9,8 +9,8 @@ This document tracks the tasks completed, in-progress, and remaining for the Pre
 - [x] **Phase 1:** Project Setup (Vite + React)
 - [x] **Phase 2:** Install & Configure Dependencies
 - [x] **Phase 3:** Folder Structure & Design System
-- [/] **Phase 4:** Navigation & Layout (Footer & Navbar complete, layout wrapping next)
-- [/] **Phase 5:** Hero / About Section (Initial version complete, wrappers next)
+- [/] **Phase 4:** Navigation & Layout (Navbar complete, Footer and layout wrapping in progress)
+- [x] **Phase 5:** Hero / About Section (Hero layout, custom typewriter animation, and 3-layer parallax background complete)
 - [ ] **Phase 6:** Skills Section
 - [ ] **Phase 7:** Projects Section
 - [ ] **Phase 8:** Experience Section
@@ -50,17 +50,21 @@ This document tracks the tasks completed, in-progress, and remaining for the Pre
 - [x] Create central project config `src/constants/siteConfig.js`
 - [x] Create social links data mapping in `src/data/socialLinks.js`
 - [x] Build sticky glassmorphic `Navbar.jsx` with active section highlights and mobile toggle drawer
-- [x] Build static-safe, secure external link `Footer.jsx`
-- [x] Export layout components in components barrel `index.js`
-- [x] Render Navbar & Footer inside `App.jsx` and adjust layout top padding
+- [ ] Build static-safe, secure external link `Footer.jsx`
+- [ ] Export layout components in components barrel `index.js`
+- [ ] Render Navbar & Footer inside `App.jsx` and adjust layout top padding
 - [x] Resolve Tailwind CSS IntelliSense warnings regarding non-canonical spacing
+- [x] Refactor `Navbar.jsx` to remove "Let's Talk" CTA actions and align items to the right
 
 ### Phase 5: Hero / About Section
 - [x] Add professional bio text in `siteConfig.js`
 - [x] Generate professional developer avatar placeholder image
 - [x] Create custom SVG brand icons component `icons.jsx` for trademark compliance
+- [x] Build `TypewriterEffect` component in `src/components/ui/typewriter-effect.jsx` with looping character-by-character animation
+- [x] Build interactive multi-layer parallax star field `HeroBackground.jsx` in `src/effects/` with mouse tracking and ambient drift
 - [x] Build responsive double-column `Hero.jsx` with staggered Framer Motion entrance animations
 - [x] Render `<Hero />` inside `<main>` wrapper in `App.jsx`
+- [x] Style bio text with `#E7E7E7` using Tailwind v4 theme variables (`text-secondary`)
 
 ---
 

@@ -4,6 +4,7 @@ import { siteConfig } from "@/constants/siteConfig";
 import { socialLinks } from "@/data/socialLinks";
 import profileImg from "@/assets/images/profile/developer_avatar.png";
 import HeroBackground from "@/effects/HeroBackground";
+import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 
 function Hero() {
   // Animation configuration (variants) for clean, staggered entrance
@@ -26,6 +27,13 @@ function Hero() {
     },
   };
 
+  const nameWords = [
+    {
+      text: "Sydney Jimenez",
+      className: "text-accent",
+    },
+  ];
+
   return (
     <section id="home" className="min-h-[90vh] flex items-center py-12">
       {/* Galaxy background — sits behind all content via -z-10 */}
@@ -41,23 +49,22 @@ function Hero() {
           {/* Subtle Accent Label */}
           <motion.span
             variants={itemVariants}
-            className="text-accent text-sm font-semibold tracking-[0.2em] uppercase mb-4"
+            className="text-white text-sm font-semibold tracking-[0.2em] uppercase mb-4"
           >
             Hello World, I'm
           </motion.span>
 
           {/* Main Name Heading */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-4"
-          >
-            {siteConfig.name}
-          </motion.h1>
+          <TypewriterEffect
+            words={nameWords}
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight justify-center lg:justify-start mb-4"
+            cursorClassName="h-8 sm:h-10 md:h-12 bg-accent"
+          />
 
           {/* Professional Title */}
           <motion.h2
             variants={itemVariants}
-            className="text-xl sm:text-2xl font-semibold text-zinc-400 mb-6"
+            className="text-xl sm:text-2xl font-semibold text-primary mb-6"
           >
             {siteConfig.title}
           </motion.h2>
@@ -65,7 +72,7 @@ function Hero() {
           {/* Bio Description */}
           <motion.p
             variants={itemVariants}
-            className="text-zinc-500 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8"
+            className="text-body text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8"
           >
             {siteConfig.bio}
           </motion.p>
@@ -98,16 +105,31 @@ function Hero() {
             {socialLinks.map((link) => {
               const Icon = link.icon;
               return (
-                <a
+                /* Add group relative to anchor the absolute tooltip and handle hover states */
+                <div
                   key={link.name}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-500 hover:text-accent transition-colors duration-300"
-                  aria-label={link.name}
+                  className="relative group flex flex-col items-center"
                 >
-                  <Icon size={22} />
-                </a>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-zinc-500 hover:text-accent transition-colors duration-300"
+                    aria-label={link.name}
+                  >
+                    <Icon size={22} />
+                  </a>
+
+                  {/* Tooltip Container */}
+                  <div className="absolute bottom-full mb-2 flex flex-col items-center opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-30">
+                    {/* Tooltip Bubble */}
+                    <span className="bg-bg-elevated text-white text-xs font-medium px-2.5 py-1 rounded-md border border-border-subtle whitespace-nowrap shadow-md">
+                      {link.name}
+                    </span>
+                    {/* Tooltip Arrow */}
+                    <div className="w-1.5 h-1.5 bg-bg-elevated border-r border-b border-border-subtle rotate-45 -mt-1" />
+                  </div>
+                </div>
               );
             })}
           </motion.div>

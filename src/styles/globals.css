@@ -16,6 +16,7 @@
   --color-bg-elevated: #1A1A1A;         /* Navbar & modals */
   --color-border-subtle: #222222;       /* Subtle separators */
   --color-border-accent: rgba(0, 255, 153, 0.15); /* Accent green border */
+  --color-body: #E7E7E7;                     /* Body copy */
 
   /* Custom Glow Shadow Utility */
   --shadow-glow: 0 0 30px rgba(0, 255, 153, 0.15);

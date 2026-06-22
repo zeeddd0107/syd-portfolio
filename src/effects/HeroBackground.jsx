@@ -1,3 +1,4 @@
+// This file is for the dynamic starry background effect in the Hero section.
 import { useMemo, useEffect, useRef } from "react";
 
 function seededRandom(seed) {
@@ -56,18 +57,28 @@ function HeroBackground() {
     window.addEventListener("mousemove", handleMouseMove);
 
     const lerp = (a, b, t) => a + (b - a) * t;
+    let time = 0;
 
     function animate() {
+      time += 0.01; // Slow constant time multiplier for ambient floating
+
       // Fast lerp for snappy, wild response
       current.current.x = lerp(current.current.x, mouse.current.x, 0.08);
       current.current.y = lerp(current.current.y, mouse.current.y, 0.08);
 
-      // Apply a different transform to each layer based on its depth
+      // Apply a different transform to each layer based on its depth & auto-drift
       layerRefs.current.forEach((ref, i) => {
         if (!ref) return;
         const depth = LAYERS[i].depth;
-        const x = current.current.x * -depth;
-        const y = current.current.y * -depth;
+
+        // Create independent slow orbiting offsets for each layer
+        // Index i variations give them different orbit speeds and directions
+        const autoX = Math.cos(time * (1.0 + i * 0.2)) * 12 * (i + 1);
+        const autoY = Math.sin(time * (0.8 + i * 0.15)) * 12 * (i + 1);
+
+        const x = current.current.x * -depth + autoX;
+        const y = current.current.y * -depth + autoY;
+
         ref.style.transform = `translate(${x}px, ${y}px)`;
       });
 

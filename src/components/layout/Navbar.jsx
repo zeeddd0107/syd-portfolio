@@ -63,17 +63,6 @@ function Navbar() {
           ))}
         </div>
 
-        {/* Desktop CTA Action Button */}
-        <div className="hidden md:block">
-          <a
-            href="#contact"
-            onClick={() => setActiveSection("#contact")}
-            className="border border-accent text-accent px-5 py-2 rounded-lg text-sm font-semibold hover:bg-accent hover:text-bg-dark transition-all duration-300 cursor-pointer"
-          >
-            Let's Talk
-          </a>
-        </div>
-
         {/* Mobile Hamburger Toggle Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -102,16 +91,6 @@ function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={() => {
-              setActiveSection("#contact");
-              setIsOpen(false);
-            }}
-            className="mt-4 border border-accent text-accent px-8 py-3 rounded-lg text-lg font-semibold hover:bg-accent hover:text-bg-dark transition-all duration-300"
-          >
-            Let's Talk
-          </a>
         </div>
       )}
     </nav>

@@ -82,22 +82,43 @@ This document tracks the step-by-step progress of building the Premium Portfolio
     *   Rendered the `<Navbar />` inside `src/App.jsx`, adjusting layout spacing with top padding.
 *   **Footer Component Implementation:**
     *   Built a matching page footer in `src/components/layout/Footer.jsx` that dynamically resolves copyright dates and renders external social links with security-standard `rel="noopener noreferrer"` parameters.
+*   **Navbar Layout Refinements:**
+    *   Removed the "Let's Talk" CTA buttons (both the desktop button and the mobile menu drawer version) to keep the navigation cleaner.
+    *   Relied on the flexbox layout container's `justify-between` utility class to automatically align the remaining desktop navigation items to the far right, matching the responsive theme.
 
 ### Phase 5: Hero / About Section (Complete)
 *   **Decoupled Site Bio:**
     *   Updated `siteConfig.js` to include the professional portfolio bio text.
 *   **Visual Asset Scaffolding:**
     *   Created a custom, theme-compliant professional developer profile avatar (`developer_avatar.png`) inside `src/assets/images/profile/`.
+*   **Custom Brand Icons:**
+    *   Created `src/components/ui/icons.jsx` to export standalone `GithubIcon` and `LinkedinIcon` SVG components.
+    *   This was necessary because `lucide-react` v1.0.0+ removed all brand/logo icons for trademark compliance.
+    *   Updated `src/data/socialLinks.js` to import from this local file instead of `lucide-react`.
+*   **TypewriterEffect Component:**
+    *   Built a reusable `TypewriterEffect` component at `src/components/ui/typewriter-effect.jsx`.
+    *   Uses Framer Motion's `useAnimate` + `stagger` to reveal characters one at a time with a configurable 0.06s per-character delay.
+    *   Uses `useInView` to trigger the animation only when the component enters the viewport.
+    *   Loops every 8 seconds: fades out characters in reverse (last-to-first), pauses 300ms, then retypes them.
+    *   Renders a blinking accent-colored cursor block after the animation completes.
+*   **HeroBackground Effect:**
+    *   Built an interactive multi-layer parallax star field in `src/effects/HeroBackground.jsx`.
+    *   Stars are organized into 3 depth layers: Far (80 stars, slow), Mid (50 stars, medium), Close (20 stars, fast).
+    *   Star positions, sizes, opacities, and twinkle timing are generated deterministically using a `seededRandom()` function (no random re-renders on hot reload).
+    *   A `mousemove` listener updates a ref (`mouse.current`) with normalized coordinates; a `requestAnimationFrame` loop lerps a smoothed position ref (`current.current`) toward the target for lag-feel parallax.
+    *   Each layer div is translated independently using `depth × current mouse position + auto-orbit offset` for a natural floating galaxy effect.
+    *   Positioned with `absolute inset-0 -z-10` so it sits behind all Hero content without capturing pointer events.
 *   **Animated Hero Component:**
     *   Implemented the unified Hero + About screen component in `src/sections/Hero.jsx`.
-    *   Configured hardware-accelerated entrance animations using Framer Motion (staggered container children with custom cubic-bezier ease curves).
-    *   Built a split columns responsive grid (text left, floating spring-hover photo right).
+    *   Configured hardware-accelerated entrance animations using Framer Motion (staggered container children with custom cubic-bezier ease curves `[0.16, 1, 0.3, 1]`).
+    *   Built a split columns responsive grid (text left `lg:col-span-7`, floating spring-hover photo right `lg:col-span-5`).
     *   Imported and displayed the new custom brand icon components for error-free loading.
 *   **Integration:**
     *   Rendered `<Hero />` inside the root `<main>` layout container in `App.jsx`.
+*   **Design and Color System Customization:**
+    *   Configured a custom `--color-secondary: #E7E7E7` color token directly in `globals.css` to represent secondary body typography.
+    *   Applied this design token as the Tailwind v4 utility class `text-secondary` to the Hero component's bio paragraph, improving reading legibility on deep background contrast.
 
-### Phase 6: Skills Section (In Progress)
+### Phase 6: Skills Section (Not Started)
 
-
-
-
+Next phase. See `TODO.md` for upcoming task breakdown.
