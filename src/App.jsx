@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { Navbar } from "@/components"; // 1. Import from our barrel file using path alias
 import Hero from "@/sections/Hero";
+import Skills from "@/sections/Skills";
 
 function App() {
   // Initialize Lenis Smooth Scroll
@@ -29,6 +30,7 @@ function App() {
       <Navbar />
       <main className="max-w-7xl mx-auto px-6 pt-24">
         <Hero />
+        <Skills />
       </main>
     </>
   );

@@ -119,6 +119,35 @@ This document tracks the step-by-step progress of building the Premium Portfolio
     *   Configured a custom `--color-secondary: #E7E7E7` color token directly in `globals.css` to represent secondary body typography.
     *   Applied this design token as the Tailwind v4 utility class `text-secondary` to the Hero component's bio paragraph, improving reading legibility on deep background contrast.
 
-### Phase 6: Skills Section (Not Started)
-
-Next phase. See `TODO.md` for upcoming task breakdown.
+### Phase 6: Skills Section (Complete)
+*   **Skills Data Model:**
+    *   Created `src/data/skills.js` to define the full list of 15 technologies (Python, Java, C#, ASP.NET Core, React, JavaScript, Tailwind CSS, HTML5, CSS3, Git, GitHub, Postman, Firebase, Express, Node.js).
+    *   Each skill entry stores `name`, `icon` (SVG path string or JSX component reference), `isSvgFile` (boolean), and `color` (brand hex color).
+    *   Used the `isSvgFile` flag to switch between rendering an `<img>` tag (for SVG file assets) and a JSX React component (for custom-drawn inline icons).
+*   **SVG Icon Assets:**
+    *   Created `src/assets/images/logos/` as the canonical folder for all brand technology SVG logo files.
+    *   Added 15 individual SVG files: `csharp.svg`, `css.svg`, `dotnetcore.svg`, `express.svg`, `firebase.svg`, `git.svg`, `github.svg`, `html.svg`, `java.svg`, `javascript.svg`, `nodejs.svg`, `postman.svg`, `python.svg`, `react.svg`, `tailwind.svg`.
+    *   Updated `express.svg` to use `fill="currentColor"` to enable dynamic color inheritance.
+*   **Custom Icon Components:**
+    *   Extended `src/components/ui/icons.jsx` with a custom `ExpressIcon` JSX component rendered using the official Express.js logo SVG path and `fill="currentColor"`.
+    *   This ensures Express matches the visual style of the `GithubIcon` and `LinkedinIcon` already in the file.
+*   **Skills Section Component:**
+    *   Built `src/sections/Skills.jsx` with the following features:
+        *   **Seamless Auto-Scroll Carousel:** Uses a `requestAnimationFrame` loop to continuously increment `scrollLeft` at `0.8px/frame`. The skills list is rendered twice side-by-side (`Array.from({ length: 2 }).map(...)`) so when the first copy ends, `scrollLeft` resets to the start of the second copy without any visible jump.
+        *   **Hover Pause:** The carousel stops scrolling when the user hovers over the container (`isHoveredContainer` ref).
+        *   **Click-and-Drag Scrolling:** `onMouseDown`, `onMouseMove`, and `onMouseUp` handlers implement desktop drag-to-scroll with a `1.5×` sensitivity multiplier and seamless loop correction during drag.
+        *   **Dynamic Icon Rendering:** Checks `skill.isSvgFile` to render either `<img src={skill.icon} />` for SVG assets or `<Icon size={52} />` for JSX components.
+        *   **Per-Card Hover Effects:** Each skill card independently tracks `hoveredIndex`, applying brand color glow (`boxShadow`), border highlight, and `translateY(-6px) scale(1.03)` lift using `style` props.
+        *   **Edge Fade Overlays:** Left and right gradient overlays mask the carousel edges for a premium polished look.
+*   **ScrollFloat Animation (Heading):**
+    *   Integrated the React Bits `ScrollFloat` GSAP component at `src/lib/react-bits/ScrollFloat.jsx` for the "Skills & Technologies" heading.
+    *   **Bug Fix — Animation Reversal:** The original `scrub: true` config caused the animation to reverse on scroll-up. Replaced with `once: true` (animation plays exactly once when element enters viewport).
+    *   **Bug Fix — React StrictMode Double-Mount:** The original `useEffect` had no cleanup function. React 18 Strict Mode mounts effects twice, creating two competing animations. Fixed by wrapping the animation in `gsap.context()` and returning `ctx.revert()` as cleanup.
+    *   **Bug Fix — Early Trigger:** Default `scrollStart = "center bottom+=50%"` caused the trigger to fire while still below the viewport. Overridden at call site with `scrollStart="top bottom"` for immediate entry-based triggering.
+    *   **Performance Improvement:** Changed ease from `back.inOut(2)` (slow ramp-up) to `power2.out` (starts at full speed). Reduced stagger from `0.04s` to `0.02s` per character for snappier reveal.
+*   **Framer Motion Entrance Animations:**
+    *   Wrapped the `"What I Work With"` subtitle label in a `<motion.span>` with `initial={{ opacity: 0, y: 15 }}` and `whileInView={{ opacity: 1, y: 0 }}` (viewport `once: true`).
+    *   Wrapped the carousel container in a `<motion.div>` with `initial={{ opacity: 0, y: 30 }}` and `whileInView={{ opacity: 1, y: 0 }}` (viewport `once: true`, `delay: 0.1s`).
+    *   Both animations use `easeOut` easing and play only once, preserving the final state when scrolling back up.
+*   **JSX Error Fix:**
+    *   Resolved `JSX elements cannot have multiple attributes with the same name` lint error on line 107 caused by two `onMouseLeave` attributes on the scroll container. Merged them into a single unified handler.

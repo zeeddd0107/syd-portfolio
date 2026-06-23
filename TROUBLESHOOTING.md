@@ -111,8 +111,32 @@ This document records the specific issues, errors, and configuration roadblocks 
 - **Problem:** Uncaught SyntaxError showing that `lucide-react` does not provide an export named `Github` (or `Linkedin`).
 - **Cause:** Starting in version 1.0.0, the Lucide project removed all corporate/brand logo icons for trademark compliance and design focus.
 - **Solution:** Created a custom React SVG icons component file (`src/components/ui/icons.jsx`) to export standalone `GithubIcon` and `LinkedinIcon` components, then updated `src/data/socialLinks.js` to import from this local file.
+### 11. GSAP ScrollFloat Animation Reverses on Scroll-Up
+- **Problem:** The React Bits `ScrollFloat` heading animation played in reverse when the user scrolled back up to the Hero section after having scrolled into the Skills section.
+- **Cause:** The `ScrollTrigger` config used `scrub: true`, which ties the animation progress 1:1 to the scroll position — scrolling up reverses it, scrolling down plays it forward.
+- **Solution:** Removed `scrub: true` and added `once: true` to the `scrollTrigger` config. `once: true` tells GSAP to self-destruct the ScrollTrigger after the animation fires for the first time, so the heading stays permanently in its final revealed state regardless of scroll direction.
 
+### 12. GSAP ScrollFloat Does Not Play After Waiting on Hero Section
+- **Problem:** If the user stayed on the Hero section for several seconds before scrolling down, the `ScrollFloat` animation on the Skills heading did not play — the heading appeared to already be in its final state silently.
+- **Cause:** Two compounding issues:
+  1. **React Strict Mode Double-Mount:** React 18 Strict Mode intentionally runs every `useEffect` twice (mount → unmount → mount) in development. Because the original `useEffect` in `ScrollFloat.jsx` had no cleanup return function, GSAP created two separate animations on the same DOM elements. The second animation's ScrollTrigger fired during initial page load and consumed the `once: true` budget, so no animation ever played when scrolled into view.
+  2. **Early Trigger Position:** The default `scrollStart = "center bottom+=50%"` resolved to a point 50% below the bottom of the viewport, which can be crossed at page load time during layout recalculations.
+- **Solution:**
+  1. Wrapped the GSAP animation inside `gsap.context()` and returned `() => ctx.revert()` as the `useEffect` cleanup. This ensures GSAP fully destroys all animations and ScrollTriggers on unmount, preventing the double-animation issue in Strict Mode.
+  2. Overrode `scrollStart` at the call site in `Skills.jsx` to `"top bottom"` — triggering only when the top edge of the heading physically enters the bottom of the viewport.
 
-
-
+### 13. JSX Duplicate `onMouseLeave` Attribute Error
+- **Problem:** VS Code and the Vite compiler flagged a lint error: `JSX elements cannot have multiple attributes with the same name` on line 107 of `Skills.jsx`.
+- **Cause:** The scroll container `<div>` in `Skills.jsx` had two separate `onMouseLeave` props added at different times during development:
+  - First one (line 102): `onMouseLeave={handleMouseLeaveOrUp}` — stops drag state.
+  - Second one (line 107): `onMouseLeave={() => { isHoveredContainer.current = false; setHoveredIndex(null); }}` — resets hover and card highlight state.
+  JSX does not allow duplicate attribute names on the same element.
+- **Solution:** Removed both duplicate `onMouseLeave` attributes and replaced them with a single unified handler that calls both behaviors:
+  ```jsx
+  onMouseLeave={() => {
+    handleMouseLeaveOrUp(); // stop drag
+    isHoveredContainer.current = false; // stop auto-scroll pause
+    setHoveredIndex(null); // clear card highlight
+  }}
+  ```
 
