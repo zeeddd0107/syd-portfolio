@@ -70,21 +70,29 @@ This document tracks the step-by-step progress of building the Premium Portfolio
 *   **Linter Integration Configuration:**
     *   Resolved CSS linting issues in VS Code for custom `@theme` and `@utility` rules by adding `css.lint.unknownAtRules: "ignore"` to a new project-level `.vscode/settings.json` file.
 
-### Phase 4: Navigation & Layout (Complete)
+### Phase 4: Navigation & Layout (In Progress)
 *   **Lenis Smooth Scroll Integration:**
     *   Configured Lenis smooth scrolling inside a `useEffect` hook in `src/App.jsx` running on a browser `requestAnimationFrame` animation frame loop.
 *   **Central Config & Data Separation:**
-    *   Created `src/constants/siteConfig.js` for portfolio metadata (name, title, email, and navigation path urls).
+    *   Created `src/constants/siteConfig.js` for portfolio metadata (name, rotating titles, email, and navigation path URLs).
     *   Created `src/data/socialLinks.js` for social profile details and Lucide icon mappings.
 *   **Navbar Component & Barrel Export:**
-    *   Built a responsive, sticky, glassmorphic navigation bar in `src/components/layout/Navbar.jsx` with desktop links, a mobile drawer toggle state, and active section highlights.
+    *   Built the initial responsive glassmorphic navigation bar in `src/components/layout/Navbar.jsx` with desktop links, mobile-menu state, and active section highlights.
     *   Configured barrel exports inside `src/components/index.js` to enable clean named imports.
     *   Rendered the `<Navbar />` inside `src/App.jsx`, adjusting layout spacing with top padding.
-*   **Footer Component Implementation:**
-    *   Built a matching page footer in `src/components/layout/Footer.jsx` that dynamically resolves copyright dates and renders external social links with security-standard `rel="noopener noreferrer"` parameters.
 *   **Navbar Layout Refinements:**
     *   Removed the "Let's Talk" CTA buttons (both the desktop button and the mobile menu drawer version) to keep the navigation cleaner.
     *   Relied on the flexbox layout container's `justify-between` utility class to automatically align the remaining desktop navigation items to the far right, matching the responsive theme.
+*   **Floating Smart Navbar Redesign:**
+    *   Reworked the full-width bar into a compact, top-centered glassmorphic pill while preserving the project color tokens.
+    *   Removed the `SJ.` brand text and replaced underline indicators with rounded active-link pills.
+    *   Added scroll-direction detection with `useRef`: manual scroll-down hides the Navbar and scroll-up reveals it.
+    *   Added a navigation lock so anchor-link smooth scrolling keeps the Navbar visible instead of being mistaken for manual downward scrolling.
+    *   Added data-driven active-section tracking based on `siteConfig.navLinks` and section offsets; future sections work automatically when their matching IDs are rendered.
+    *   Replaced the mobile fullscreen drawer with a centered responsive glass dropdown and improved `aria-label`/`aria-expanded` behavior.
+    *   Added an accessible theme-toggle placeholder; visual UI is present, but theme switching is intentionally deferred.
+*   **Remaining Layout Work:**
+    *   Footer creation, export, and App integration remain pending.
 
 ### Phase 5: Hero / About Section (Complete)
 *   **Decoupled Site Bio:**
@@ -99,8 +107,14 @@ This document tracks the step-by-step progress of building the Premium Portfolio
     *   Built a reusable `TypewriterEffect` component at `src/components/ui/typewriter-effect.jsx`.
     *   Uses Framer Motion's `useAnimate` + `stagger` to reveal characters one at a time with a configurable 0.06s per-character delay.
     *   Uses `useInView` to trigger the animation only when the component enters the viewport.
-    *   Loops every 8 seconds: fades out characters in reverse (last-to-first), pauses 300ms, then retypes them.
+    *   Refactored the component to accept a plain `phrases` array and rotate to the next phrase after each reverse fade-out.
+    *   Loops every 8 seconds: fades out characters in reverse, advances with modulo indexing, pauses 300ms, then types the next phrase.
     *   Renders a blinking accent-colored cursor block after the animation completes.
+*   **Hero Typography Refinement:**
+    *   Removed the repeating typewriter animation from the developer name and restored it as a stable semantic `<h1>`.
+    *   Moved the rotating animation to the professional subtitle.
+    *   Stored five phrases in `siteConfig.titles`: Aspiring Full-Stack Developer, Curious by Nature, Pragmatic, Simplicity First, and Building With Purpose.
+    *   Tuned cursor spacing responsively while keeping it visible on mobile.
 *   **HeroBackground Effect:**
     *   Built an interactive multi-layer parallax star field in `src/effects/HeroBackground.jsx`.
     *   Stars are organized into 3 depth layers: Far (80 stars, slow), Mid (50 stars, medium), Close (20 stars, fast).
@@ -151,3 +165,17 @@ This document tracks the step-by-step progress of building the Premium Portfolio
     *   Both animations use `easeOut` easing and play only once, preserving the final state when scrolling back up.
 *   **JSX Error Fix:**
     *   Resolved `JSX elements cannot have multiple attributes with the same name` lint error on line 107 caused by two `onMouseLeave` attributes on the scroll container. Merged them into a single unified handler.
+*   **Mobile Responsiveness Refinement:**
+    *   Scaled the `"What I Work With"` label and reduced tracking on narrow screens.
+    *   Added a fluid `clamp()` size for the ScrollFloat heading, centered it on mobile, and preserved desktop alignment.
+    *   Tuned label-to-heading spacing independently for mobile and desktop.
+    *   Reduced mobile skill cards from the desktop `12rem` size to `8rem`, with smaller icons, typography, corner radius, and carousel gaps.
+    *   Preserved the existing desktop card dimensions and interactions from the `sm` breakpoint upward.
+
+### Phase 7: Projects Section (Planned)
+*   Use a data-driven `src/data/projects.js` model and reusable `ProjectCard.jsx`.
+*   Build an original responsive Bento Grid with no more than three cards per row.
+*   Allow website projects to span wider columns while utilities, APIs, mobile apps, and tools use standard tiles.
+*   Include screenshots, title, concise description, technology stack, icon-based GitHub action, and optional Live Demo action.
+*   Use lazy-loaded screenshots, semantic links, descriptive alternative text, keyboard-visible focus states, and restrained Framer Motion interactions.
+*   Treat external portfolios only as inspiration; do not reproduce their layout, styling, motion, spacing, or interactions one-to-one.

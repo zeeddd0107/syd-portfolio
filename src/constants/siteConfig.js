@@ -1,6 +1,12 @@
 export const siteConfig = {
   name: 'Sydney Jimenez',
-  title: 'Aspiring Full-Stack Developer',
+  titles: [
+    'Aspiring Full-Stack Developer',
+    'Curious by Nature',
+    'Pragmatic',
+    'Simplicity First',
+    'Building With Purpose',
+  ],
   email: 'syd.jimenez07@gmail.com',
   github: 'https://github.com/zeeddd0107',
   linkedin: 'https://www.linkedin.com/in/sydney-jimenez-53304a3aa/',

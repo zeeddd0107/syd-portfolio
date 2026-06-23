@@ -3,14 +3,13 @@ import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { useEffect, useState } from "react";
 
 // Option A: Character-by-character typewriter reveal
-export function TypewriterEffect({ words, className, cursorClassName }) {
+export function TypewriterEffect({ phrases, className, cursorClassName }) {
   const [isComplete, setIsComplete] = useState(false);
   const [trigger, setTrigger] = useState(0);
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
 
-  const wordsArray = words.map((word) => ({
-    ...word,
-    chars: word.text.split(""),
-  }));
+  const currentPhrase = phrases[currentPhraseIndex];
+  const characters = currentPhrase.split("");
 
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope, { once: true });
@@ -31,7 +30,22 @@ export function TypewriterEffect({ words, className, cursorClassName }) {
             ease: "easeInOut",
           },
         );
-        // Small breath pause before typing starts again
+
+        // Move to the next phrase after the current phrase disappears
+        // The % modulo operator returns to the first phrase after the final phrase.
+        setCurrentPhraseIndex(
+          (previousIndex) => (previousIndex + 1) % phrases.length,
+        );
+
+        // Wait for React to render the new phrase
+        // The two requestAnimationFrame calls give React enough time to replace the old character elements before Framer Motion animates the new ones.
+        await new Promise((resolve) => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(resolve);
+          });
+        });
+
+        // Small pause before typing the new phrase
         await new Promise((resolve) => setTimeout(resolve, 300));
       }
 
@@ -63,22 +77,19 @@ export function TypewriterEffect({ words, className, cursorClassName }) {
 
   return (
     <div className={cn("inline-block", className)}>
-      <motion.div ref={scope} className="inline">
-        {wordsArray.map((word, wordIndex) => (
-          <span key={`word-${wordIndex}`} className="inline-block">
-            {word.chars.map((char, charIndex) => (
-              <motion.span
-                initial={{ opacity: 0 }}
-                key={`char-${charIndex}`}
-                className={cn(`opacity-0 ${word.className || ""}`, "char")}
-              >
-                {char}
-              </motion.span>
-            ))}
-            &nbsp;
-          </span>
-        ))}
-      </motion.div>
+      <motion.span ref={scope} className="inline">
+        <span key={currentPhrase} className="inline-block">
+          {characters.map((character, characterIndex) => (
+            <motion.span
+              initial={{ opacity: 0 }}
+              key={`${currentPhrase}-${characterIndex}`}
+              className="char opacity-0"
+            >
+              {character}
+            </motion.span>
+          ))}
+        </span>
+      </motion.span>
       {isComplete && (
         <motion.span
           initial={{ opacity: 0 }}
@@ -89,7 +100,7 @@ export function TypewriterEffect({ words, className, cursorClassName }) {
             repeatType: "reverse",
           }}
           className={cn(
-            "inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-accent vertical-middle align-middle",
+            "inline-block rounded-sm w-1 h-4 md:h-6 lg:h-8 bg-accent vertical-middle align-middle",
             cursorClassName,
           )}
         />

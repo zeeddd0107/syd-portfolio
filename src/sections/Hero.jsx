@@ -27,13 +27,6 @@ function Hero() {
     },
   };
 
-  const nameWords = [
-    {
-      text: "Sydney Jimenez",
-      className: "text-accent",
-    },
-  ];
-
   return (
     <section id="home" className="min-h-[90vh] flex items-center py-12">
       {/* Galaxy background — sits behind all content via -z-10 */}
@@ -55,18 +48,22 @@ function Hero() {
           </motion.span>
 
           {/* Main Name Heading */}
-          <TypewriterEffect
-            words={nameWords}
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight justify-center lg:justify-start mb-4"
-            cursorClassName="h-8 sm:h-10 md:h-12 bg-accent"
-          />
+          <motion.h1
+            variants={itemVariants}
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-accent tracking-tight mb-4"
+          >
+            {siteConfig.name}
+          </motion.h1>
 
           {/* Professional Title */}
           <motion.h2
             variants={itemVariants}
             className="text-xl sm:text-2xl font-semibold text-primary mb-6"
           >
-            {siteConfig.title}
+            <TypewriterEffect
+              phrases={siteConfig.titles}
+              cursorClassName="ml-1 md:ml-2 w-0.75 h-6 sm:h-4 md:h-4 lg:h-7 bg-accent align-top"
+            />
           </motion.h2>
 
           {/* Bio Description */}

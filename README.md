@@ -51,7 +51,7 @@ src/
 │   ├── buttons/              # Button components
 │   └── index.js              # Barrel export file
 ├── constants/                # Static site-wide configuration
-│   └── siteConfig.js         # Name, title, bio, nav links, resume URL
+│   └── siteConfig.js         # Name, rotating titles, bio, nav links, resume URL
 ├── data/                     # Dynamic data models
 │   ├── socialLinks.js        # Social profile links + icon mappings
 │   └── skills.js             # 15-skill data array with icons, colors, isSvgFile flags
@@ -92,10 +92,11 @@ src/
 - 🎬 **Framer Motion** — staggered entrance and spring hover animations
 - 🔤 **GSAP ScrollTrigger** — one-shot character-by-character heading reveal
 - 🌌 **Interactive star field** — mouse-responsive multi-layer parallax background
-- ⌨️ **Typewriter effect** — animated character-by-character name reveal with loop
+- ⌨️ **Rotating subtitle typewriter** — cycles through five professional phrases while keeping the name stable
+- 🧭 **Smart floating Navbar** — centered glass navigation that hides on scroll-down, returns on scroll-up, and tracks the active section
 - 🎡 **Infinite skill carousel** — seamless auto-scrolling with hover-pause and drag support
 - 🖼️ **SVG icon system** — brand-accurate technology logos with dynamic color theming
-- 📱 **Fully responsive** — mobile-first layout with collapsible nav drawer
+- 📱 **Fully responsive** — compact mobile skill cards, responsive headings, and a glass navigation dropdown
 
 ---
 
@@ -109,7 +110,7 @@ The color palette and typography are defined as Tailwind v4 CSS tokens in `src/s
 | `--color-bg-dark` | `#0A0A0A` | Page background |
 | `--color-bg-card` | `#111111` | Card surfaces |
 | `--color-bg-elevated` | `#1A1A1A` | Navbar / modal backgrounds |
-| `--color-secondary` | `#E7E7E7` | Secondary body text |
+| `--color-body` | `#E7E7E7` | Secondary body text |
 | `--color-border-subtle` | `#222222` | Separator lines |
 | `--color-border-accent` | `rgba(0,255,153,0.15)` | Accent green card borders |
 | `--shadow-glow` | `0 0 30px rgba(0,255,153,0.15)` | Card glow shadow |

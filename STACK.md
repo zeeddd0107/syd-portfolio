@@ -28,7 +28,7 @@ This document lists and explains the core technologies, libraries, and tools use
 
 | Library | Category | Version | Purpose |
 |---|---|---|---|
-| **Framer Motion** | Animation Library | ^12.40.0 | Handles entrance animations, staggered lists, hover scales, and character-by-character typewriter effects. |
+| **Framer Motion** | Animation Library | ^12.40.0 | Handles entrance animations, staggered lists, hover scales, and the rotating character-by-character subtitle effect. |
 | **GSAP (ScrollTrigger)** | Animation Library | ^3.x | Used for the `ScrollFloat` character-by-character heading reveal animation with one-shot viewport triggering (`once: true`) and `gsap.context()` lifecycle cleanup. |
 | **Lenis** | Smooth Scroll | ^1.3.23 | Normalizes browser scroll speed and momentum to deliver a premium, fluid scrolling experience. |
 
@@ -73,3 +73,13 @@ The `src/` directory is organized by role, not by feature:
 | `src/assets/images/logos/` | Brand technology SVG logo files | One SVG per technology, kebab-case named |
 | `src/styles/` | Global CSS entry file | `globals.css` only — no component-level CSS files |
 | `src/utils/` | Custom pure utility functions | Reserved for future use |
+
+---
+
+## Current Interaction Architecture
+
+- **Navbar scroll behavior:** React `useState`, `useEffect`, and `useRef` track visibility, previous scroll position, navigation locks, mobile-menu state, and the active section.
+- **Active-section tracking:** `siteConfig.navLinks` is the single source of truth. Existing section elements are detected by their hash IDs, so future sections participate automatically when matching IDs are rendered.
+- **Hero subtitle animation:** `siteConfig.titles` stores plain strings; `TypewriterEffect` owns phrase rotation and character animation.
+- **Responsive styling:** Tailwind mobile-first classes reduce the Skills heading, card, icon, typography, and carousel spacing below the `sm` breakpoint without changing desktop presentation.
+- **Theme control:** The Navbar currently exposes an accessible disabled-state placeholder only. Theme switching is intentionally not implemented yet.

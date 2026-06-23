@@ -140,3 +140,32 @@ This document records the specific issues, errors, and configuration roadblocks 
   }}
   ```
 
+### 14. Navbar Hides During Anchor-Link Navigation
+
+- **Problem:** Clicking a Navbar link caused the Navbar to disappear while the browser smoothly scrolled to the selected section.
+- **Cause:** The scroll-direction handler treated all increases in `window.scrollY` as manual downward scrolling and could not distinguish an anchor-triggered scroll.
+- **Solution:** Added an `isNavigating` ref and a short inactivity timer. Link clicks lock the Navbar visible while navigation is active, and normal direction detection resumes after scrolling stops.
+
+### 15. Active Navbar Tab Did Not Update Reliably When Scrolling Up
+
+- **Problem:** Manual scrolling changed the active tab from Home to Skills, but scrolling back upward did not consistently restore Home.
+- **Cause:** The first `IntersectionObserver` approach skipped intersection updates while navigation was locked and did not always emit another callback after the lock ended.
+- **Solution:** Replaced the observer with data-driven position tracking inside the existing scroll handler. The active section is the last rendered section whose `offsetTop` has crossed an activation point 35% down the viewport. Missing future sections are ignored until matching IDs are rendered.
+
+### 16. Skills Content Was Oversized on Mobile
+
+- **Problem:** The Skills label, animated heading, carousel gaps, technology tiles, icons, and labels consumed too much space on narrow screens.
+- **Cause:** Most dimensions used desktop-oriented fixed Tailwind classes at the base breakpoint.
+- **Solution:** Added mobile-first sizing and restored the original dimensions with `sm:`/`md:` modifiers. The heading uses a fluid `clamp()` value, cards use `w-32 h-32` on mobile, and desktop sizes remain unchanged.
+
+### 17. PowerShell Blocks the `npm.ps1` Wrapper
+
+- **Problem:** `npm run lint` and `npm run build` failed in PowerShell with a script-signing error for `npm.ps1`.
+- **Cause:** The machine's PowerShell execution policy does not permit the unsigned npm wrapper script.
+- **Solution:** Run the Windows command shim instead:
+  ```powershell
+  npm.cmd run lint
+  npm.cmd run build
+  ```
+  This changes only how npm is invoked and does not alter the project.
+
