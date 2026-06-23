@@ -11,7 +11,7 @@ This document tracks the tasks completed, in-progress, and remaining for the Pre
 - [x] **Phase 3:** Folder Structure & Design System
 - [/] **Phase 4:** Navigation & Layout (Navbar complete, Footer and layout wrapping in progress)
 - [x] **Phase 5:** Hero / About Section (Hero layout, custom typewriter animation, and 3-layer parallax background complete)
-- [ ] **Phase 6:** Skills Section
+- [x] **Phase 6:** Skills Section
 - [ ] **Phase 7:** Projects Section
 - [ ] **Phase 8:** Experience Section
 - [ ] **Phase 9:** Contact Section
@@ -71,10 +71,18 @@ This document tracks the tasks completed, in-progress, and remaining for the Pre
 ## 🚀 Upcoming Tasks
 
 ### Phase 6: Skills Section
-- [ ] Create static skills data model in `src/data/skills.js` grouped by categories
-- [ ] Create reusable, animated `SkillCard.jsx` inside `src/components/cards/`
-- [ ] Create data-driven `Skills.jsx` section in `src/sections/`
-- [ ] Render Skills section in `App.jsx` and verify animations
+- [x] Create static skills data model in `src/data/skills.js` with 15 technologies
+- [x] Store SVG brand logo files in `src/assets/images/logos/` (15 icons)
+- [x] Create custom `ExpressIcon` JSX component in `src/components/ui/icons.jsx` (fill-based, white)
+- [x] Create data-driven `Skills.jsx` section in `src/sections/` with carousel auto-scroll
+- [x] Implement seamless infinite horizontal carousel using `requestAnimationFrame` loop
+- [x] Implement click-and-drag manual scrolling with seamless loop correction
+- [x] Integrate React Bits `ScrollFloat` animation for the section heading
+- [x] Fix `ScrollFloat` reverse animation bug (replaced `scrub: true` with `once: true` + `gsap.context` cleanup)
+- [x] Fix duplicate `onMouseLeave` JSX attribute error (merged into single handler)
+- [x] Add Framer Motion entrance animations for subtitle label and carousel container
+- [x] Render `<Skills />` inside `App.jsx`
+- [x] Verify `isSvgFile` flag correctly routes between `<img>` and JSX component rendering
 
 ### Phase 7: Projects Section
 - [ ] Create projects data model in `src/data/projects.js` (featured project: GymPlify)

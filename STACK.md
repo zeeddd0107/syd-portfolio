@@ -29,7 +29,7 @@ This document lists and explains the core technologies, libraries, and tools use
 | Library | Category | Version | Purpose |
 |---|---|---|---|
 | **Framer Motion** | Animation Library | ^12.40.0 | Handles entrance animations, staggered lists, hover scales, and character-by-character typewriter effects. |
-| **GSAP (ScrollTrigger)** | Animation Library | *(planned)* | Planned for complex scroll-tied timelines and page transitions that require precise timing control. |
+| **GSAP (ScrollTrigger)** | Animation Library | ^3.x | Used for the `ScrollFloat` character-by-character heading reveal animation with one-shot viewport triggering (`once: true`) and `gsap.context()` lifecycle cleanup. |
 | **Lenis** | Smooth Scroll | ^1.3.23 | Normalizes browser scroll speed and momentum to deliver a premium, fluid scrolling experience. |
 
 ---
@@ -67,7 +67,9 @@ The `src/` directory is organized by role, not by feature:
 | `src/components/buttons/` | Custom button variants | Wraps `<a>` or `<button>` |
 | `src/effects/` | DOM/canvas visual effect components | Not content — purely decorative, pointer-events-none |
 | `src/constants/` | Static site config and metadata | JS objects; no JSX |
-| `src/data/` | Dynamic content arrays (social links, projects, etc.) | JS arrays/objects; no JSX |
-| `src/lib/` | Third-party wrappers and utility factories | e.g. `cn()` from clsx + tailwind-merge |
+| `src/data/` | Dynamic content arrays (social links, skills, etc.) | JS arrays/objects; no JSX |
+| `src/lib/` | Third-party wrappers and utility factories | e.g. `cn()` from clsx + tailwind-merge; React Bits components |
+| `src/lib/react-bits/` | React Bits third-party animation components | e.g. `ScrollFloat.jsx` — treat as read-only vendor code |
+| `src/assets/images/logos/` | Brand technology SVG logo files | One SVG per technology, kebab-case named |
 | `src/styles/` | Global CSS entry file | `globals.css` only — no component-level CSS files |
 | `src/utils/` | Custom pure utility functions | Reserved for future use |
