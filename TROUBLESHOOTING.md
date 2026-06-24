@@ -261,3 +261,81 @@ import gymplifyImage from "@/assets/images/projects/gymplify-dashboard.png";
 **Cause:** Desktop-oriented spacing and image positioning were carrying into mobile.
 
 **Solution:** Added mobile-safe padding, smaller text/pill sizing, and better screenshot object positioning while preserving the modal UI.
+
+---
+
+## 25. Nested Group Hover Changed All Contact Link Text
+
+**Problem:** Hovering the large Contact info card caused all contact details inside it to turn green.
+
+**Cause:** The outer card and each inner contact link used the same unnamed Tailwind `group`, so `group-hover:text-accent` responded to the parent card hover instead of only the individual link hover.
+
+**Solution:** Used named groups:
+
+```jsx
+group/spotlight
+group/contact-link
+group-hover/contact-link:text-accent
+```
+
+This keeps the spotlight hover separate from each contact-link hover.
+
+---
+
+## 26. Spotlight Hover Needed to Be Reused Across Cards
+
+**Problem:** The cursor-following spotlight effect was useful in Contact, Projects, and Skills, but copying the same layer and mouse-position code everywhere would be hard to maintain.
+
+**Cause:** The visual effect has two separate responsibilities:
+
+- the static visual layer
+- the mouse-position logic
+
+**Solution:** Split it into:
+
+- `src/components/ui/SpotLightLayer.jsx` for the exact gradient layer
+- `src/utils/spotlight.js` for `handleSpotlightMove`
+
+Cards keep their own structure while sharing the same spotlight behavior.
+
+---
+
+## 27. Contact Form Should Not Pretend to Send Email
+
+**Problem:** The form needed feedback even though no email service is connected yet.
+
+**Cause:** A success-style message can be misleading if it says or implies that a message was actually sent.
+
+**Solution:** The toast message clearly states that email sending is not connected yet and that the form is ready for integration.
+
+---
+
+## 28. Contact Form Needed Basic Email Validation
+
+**Problem:** Users could enter invalid email text and still trigger the success feedback.
+
+**Cause:** Browser `type="email"` helps, but local validation gives clearer control over success/error toasts.
+
+**Solution:** Added a simple local email validation helper:
+
+```js
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+```
+
+Invalid email keeps the fields filled and shows an error toast. Valid submit clears the fields and shows a success/informational toast.
+
+---
+
+## 29. Toast Notification Needed to Feel Like a Real App Notification
+
+**Problem:** Inline form feedback felt less polished and occupied form layout space.
+
+**Cause:** The Contact section needed feedback that was visible without shifting the form.
+
+**Solution:** Created `Toast.jsx` with:
+
+- top-right fixed placement
+- smooth Framer Motion entrance/exit
+- success, error, warning, and info variants
+- X dismiss button
+- 3-second auto-dismiss handled from Contact submit logic

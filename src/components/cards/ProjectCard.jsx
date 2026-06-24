@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { projectTechnologyIcons } from "@/data/projectTechnologyIcons";
+import SpotlightLayer from "@/components/ui/SpotlightLayer";
+import { handleSpotlightMove } from "@/utils/spotlight";
 
 function ProjectCard({ project, onViewProject }) {
   const { title, description, technologies, image, imageAlt } = project;
@@ -9,6 +11,7 @@ function ProjectCard({ project, onViewProject }) {
     <motion.article
       role="button"
       tabIndex={0}
+      onMouseMove={handleSpotlightMove}
       onClick={() => onViewProject(project)}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
@@ -31,9 +34,10 @@ function ProjectCard({ project, onViewProject }) {
         borderColor: { duration: 0.25 },
         boxShadow: { duration: 0.25 },
       }}
-      className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border-subtle bg-[#111211] backdrop-blur-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+      className="group group/spotlight relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border-subtle bg-[#111211] backdrop-blur-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
     >
-      <div className="relative aspect-4/3 overflow-hidden border-b border-border-subtle bg-bg-elevated sm:aspect-video">
+      <SpotlightLayer />
+      <div className="relative z-10 aspect-4/3 overflow-hidden border-b border-border-subtle bg-bg-elevated sm:aspect-video">
         {image ? (
           <img
             src={image}
@@ -55,7 +59,7 @@ function ProjectCard({ project, onViewProject }) {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col p-4 sm:p-6">
+      <div className="relative z-10 flex flex-1 flex-col p-4 sm:p-6">
         <h3 className="text-lg font-bold text-white transition-colors duration-300 group-hover:text-accent sm:text-2xl">
           {title}
         </h3>

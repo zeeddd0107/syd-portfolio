@@ -5,16 +5,66 @@ import { Mail } from "lucide-react";
 import { siteConfig } from "@/constants/siteConfig";
 import HeroBackground from "@/effects/HeroBackground";
 import ScrollFloat from "@/lib/react-bits/ScrollFloat";
+import Toast from "@/components/ui/Toast";
 
 function Contact() {
-  const [submitMessage, setSubmitMessage] = useState("");
+  const [toast, setToast] = useState(null);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData((currentData) => ({
+      ...currentData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setSubmitMessage(
-      "Thanks for reaching out. This form UI is ready and will be connected soon.",
-    );
+    if (!isValidEmail(formData.email)) {
+      setToast({
+        type: "error",
+        title: "Invalid email",
+        message:
+          "Please enter a valid email address before sending your message.",
+      });
+
+      window.setTimeout(() => {
+        setToast(null);
+      }, 3000);
+
+      return;
+    }
+
+    setToast({
+      type: "success",
+      title: "Message noted!",
+      message:
+        "Thanks for reaching out. Email sending is not connected yet, but the form is ready for integration.",
+    });
+
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
+
+    window.setTimeout(() => {
+      setToast(null);
+    }, 3000);
   };
 
   const handleSpotlightMove = (event) => {
@@ -186,6 +236,8 @@ function Contact() {
                     type="text"
                     autoComplete="name"
                     required
+                    value={formData.name}
+                    onChange={handleInputChange}
                     placeholder="Your name"
                     className="w-full rounded-2xl border border-border-subtle bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-zinc-500 focus:border-accent/70"
                   />
@@ -204,6 +256,8 @@ function Contact() {
                     type="email"
                     autoComplete="email"
                     required
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="you@example.com"
                     className="w-full rounded-2xl border border-border-subtle bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-zinc-500 focus:border-accent/70"
                   />
@@ -222,6 +276,8 @@ function Contact() {
                   name="subject"
                   type="text"
                   required
+                  value={formData.subject}
+                  onChange={handleInputChange}
                   placeholder="Project, opportunity, or collaboration"
                   className="w-full rounded-2xl border border-border-subtle bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-zinc-500 focus:border-accent/70"
                 />
@@ -239,6 +295,8 @@ function Contact() {
                   name="message"
                   required
                   rows={6}
+                  value={formData.message}
+                  onChange={handleInputChange}
                   placeholder="Tell me about your idea..."
                   className="min-h-40 w-full resize-y rounded-2xl border border-border-subtle bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-zinc-500 focus:border-accent/70"
                 />
@@ -250,18 +308,11 @@ function Contact() {
               >
                 Send Message
               </button>
-              {submitMessage && (
-                <p
-                  role="status"
-                  className="mt-4 rounded-2xl border border-accent/20 bg-accent/10 px-4 py-3 text-sm text-accent"
-                >
-                  {submitMessage}
-                </p>
-              )}
             </div>
           </form>
         </motion.div>
       </div>
+      <Toast toast={toast} onClose={() => setToast(null)} />
     </section>
   );
 }

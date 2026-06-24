@@ -52,8 +52,8 @@ src/
 │       └── backgrounds/      # Background image assets
 ├── components/
 │   ├── cards/                # ProjectCard and future reusable card components
-│   ├── layout/               # Navbar and future Footer
-│   ├── ui/                   # Icons, typewriter effect, ProjectModal
+│   ├── layout/               # Navbar and Footer
+│   ├── ui/                   # Icons, typewriter effect, ProjectModal, Toast, SpotLightLayer
 │   └── index.js              # Barrel export file
 ├── constants/
 │   └── siteConfig.js         # Name, rotating titles, bio, nav links, resume URL
@@ -71,9 +71,12 @@ src/
 ├── sections/
 │   ├── Hero.jsx
 │   ├── Projects.jsx
+│   ├── Contact.jsx
 │   └── Skills.jsx
 ├── styles/
 │   └── globals.css
+├── utils/
+│   └── spotlight.js          # Shared mouse-position helper for spotlight effects
 ├── App.jsx
 └── main.jsx
 ```
@@ -104,6 +107,11 @@ src/
 - **Responsive Skills carousel** — seamless auto-scroll, drag-to-scroll, brand-colored hover states, smaller mobile tiles, and masked edge fade.
 - **Responsive Projects section** — data-driven Bento-style grid with wide website tiles, compact concept tiles, lazy screenshots, and accessible project cards.
 - **Project detail modal** — whole-card click opens a scroll-locked modal with sticky title bar, screenshot gallery arrows/dots, GitHub action, optional Live Demo action, and technology logos.
+- **Contact section** — responsive two-column contact area with accessible form fields, email validation, field clearing, and toast feedback.
+- **Footer** — themed footer with navigation, social links, animated background, and project credit line.
+- **Reusable spotlight effect** — cursor-following light effect shared across Contact cards, Project cards, and Skills cards.
+- **Toast notifications** — smooth top-right success/error feedback with accessible status messaging and 3-second auto-dismiss.
+- **Form validation** — Contact form validates email format and clears fields after a valid local submit.
 - **SVG icon system** — custom brand-safe social icons plus technology logo assets.
 
 ---

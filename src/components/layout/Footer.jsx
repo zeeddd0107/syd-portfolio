@@ -15,7 +15,7 @@ function Footer() {
         <div>
           <a
             href="#home"
-            className="inline-flex text-2xl font-extrabold tracking-tight text-accent transition-opacity duration-300 hover:opacity-80"
+            className="inline-flex text-xl font-extrabold tracking-tight text-accent transition-opacity duration-300 hover:opacity-80"
             aria-label="Back to home"
           >
             {siteConfig.name}

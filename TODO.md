@@ -9,12 +9,12 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] **Phase 1:** Project Setup (Vite + React)
 - [x] **Phase 2:** Install & Configure Dependencies
 - [x] **Phase 3:** Folder Structure & Design System
-- [/] **Phase 4:** Navigation & Layout — smart Navbar complete; Footer remains
+- [x] **Phase 4:** Navigation & Layout
 - [x] **Phase 5:** Hero / About Section
 - [x] **Phase 6:** Skills Section
 - [x] **Phase 7:** Projects Section
 - [ ] **Phase 8:** Experience Section — deferred; Navbar tab hidden for now
-- [ ] **Phase 9:** Contact Section
+- [/] **Phase 9:** Contact Section — UI, validation, and toast feedback complete; real email sending deferred
 - [ ] **Phase 10:** Advanced Animations & Polish
 - [ ] **Phase 11:** 3D Elements (Optional)
 - [ ] **Phase 12:** Optimization & Accessibility
@@ -31,7 +31,7 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] Remove default boilerplate assets and CSS.
 - [x] Reset the app entry component.
 - [x] Initialize Git inside the project folder.
-- [x] Connect the local repository to GitHub.
+- [x] Connect the project to GitHub.
 
 ### Phase 2: Install & Configure Dependencies
 
@@ -62,7 +62,7 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] Add accessible placeholder theme toggle UI.
 - [x] Hide the Experience tab while the section is deferred.
 - [x] Render Navbar inside `App.jsx`.
-- [ ] Build and render Footer.
+- [x] Build and render Footer.
 
 ### Phase 5: Hero / About Section
 
@@ -74,6 +74,7 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] Add developer avatar asset.
 - [x] Create brand-safe custom social icons.
 - [x] Build responsive Hero layout with Framer Motion entrance animations.
+- [x] Improve the Hero entrance animation while keeping the name stable.
 - [x] Build and render interactive `HeroBackground`.
 - [x] Convert the app layout so full-width sections own their backgrounds while inner content remains constrained.
 
@@ -87,12 +88,14 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] Add hover pause and click-and-drag scrolling.
 - [x] Add brand-colored skill card hover states.
 - [x] Integrate `ScrollFloat` heading animation.
+- [x] Center the section label and heading.
 - [x] Fix ScrollFloat reversal and StrictMode cleanup issues.
 - [x] Add responsive label, heading, spacing, cards, icons, and text.
 - [x] Apply the shared `HeroBackground` to the Skills section.
 - [x] Constrain the carousel to `max-w-7xl`.
 - [x] Add masked carousel edge fading without dark overlay blocks.
 - [x] Tune skill card surface color.
+- [x] Apply reusable spotlight hover effect to Skills cards.
 
 ### Phase 7: Projects Section
 
@@ -107,6 +110,7 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] Make the whole card clickable while keeping the View button.
 - [x] Remove direct GitHub button from the card while preserving `githubUrl` in data.
 - [x] Add card hover border/glow without scale enlargement.
+- [x] Apply reusable spotlight hover effect to Project cards.
 - [x] Build `ProjectModal.jsx` with sticky header, close button, scroll lock, and backdrop click-to-close.
 - [x] Prevent background page scroll while the modal is open.
 - [x] Keep modal content scrollable with mouse wheel and scrollbar.
@@ -114,8 +118,34 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] Add modal technology logo section with hover scaling.
 - [x] Add optional project screenshot gallery using `images`, arrows, and dots.
 - [x] Apply the shared `HeroBackground` to Projects.
+- [x] Center the section label, heading, and description.
 - [x] Improve mobile Projects spacing, card sizing, text sizing, and screenshot behavior.
 - [x] Integrate `<Projects />` into `App.jsx`.
+
+### Phase 9: Contact Section
+
+- [x] Review external contact-page reference for structure only.
+- [x] Build responsive Contact section layout.
+- [x] Add `HeroBackground` to Contact.
+- [x] Add `ScrollFloat` animation to the `Hire me` heading.
+- [x] Add contact links for email, GitHub, and LinkedIn.
+- [x] Add accessible form labels, required fields, and controlled inputs.
+- [x] Add email format validation.
+- [x] Clear all form fields after a valid submit.
+- [x] Add reusable top-right `Toast.jsx` notification UI.
+- [x] Show success and invalid-email toast states.
+- [x] Auto-dismiss toast notifications after 3 seconds.
+- [x] Apply spotlight hover effect to Contact cards.
+- [ ] Add real email sending integration if needed.
+- [ ] Improve repeated rapid-submit toast timer cleanup with `useRef`.
+
+### Shared UI Polish
+
+- [x] Create reusable `SpotLightLayer.jsx` for cursor-following highlights.
+- [x] Create shared `handleSpotlightMove` helper in `src/utils/spotlight.js`.
+- [x] Apply spotlight effect to Contact, Project, and Skills cards.
+- [x] Add Footer star background.
+- [x] Add Footer heart credit line.
 
 ---
 
@@ -128,17 +158,9 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [ ] Build timeline/card UI.
 - [ ] Add the Navbar tab back only when the section exists.
 
-### Phase 9: Contact Section
-
-- [ ] Choose form strategy.
-- [ ] Build contact section layout.
-- [ ] Add validation.
-- [ ] Add email sending integration if needed.
-- [ ] Add accessible status feedback.
-
 ### Phase 10: Advanced Animations & Polish
 
-- [ ] Review animation density across Hero, Skills, and Projects.
+- [ ] Review animation density across Hero, Skills, Projects, and Contact.
 - [ ] Audit mobile spacing across all current sections.
 - [ ] Tune hover, focus, and reduced-motion behavior.
 
@@ -149,9 +171,10 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [ ] Verify keyboard-only navigation.
 - [ ] Verify modal focus behavior.
 - [ ] Check alt text and ARIA labels.
+- [ ] Verify toast announcement behavior.
 
 ### Phase 13: Deployment
 
-- [ ] Run production build.
+- [ ] Create production build.
 - [ ] Deploy to Vercel or Netlify.
 - [ ] Verify deployed routing, assets, and performance.

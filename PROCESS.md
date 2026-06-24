@@ -62,7 +62,7 @@ This document records the build process, decisions, and phase outcomes for the P
 - Added responsive mobile dropdown.
 - Added placeholder-only theme toggle UI with accessible labeling.
 - Removed the Experience tab for now because the section is deferred.
-- Footer remains pending.
+- Footer is now implemented and rendered after the Contact section.
 
 ---
 
@@ -159,6 +159,7 @@ Key decision:
   - better screenshot object positioning
   - smaller mobile description and technology pills
   - modal left untouched after it was confirmed working well
+- Added the shared spotlight hover effect to Project cards using `SpotLightLayer.jsx` and `handleSpotlightMove`.
 
 Key decisions:
 
@@ -166,6 +167,48 @@ Key decisions:
 - Optional `images` powers the modal gallery.
 - `githubUrl` stays in `projects.js` even when GitHub is not shown on the card.
 - Project detail actions belong in the modal, not the preview card.
+
+---
+
+## Phase 9: Contact and Footer
+
+- Skipped the Experience section for now and kept its Navbar tab hidden.
+- Reviewed an external Contact page as structural inspiration only.
+- Built `Contact.jsx` with:
+  - shared `HeroBackground`
+  - centered `Contact` label
+  - `Hire me` heading animated with `ScrollFloat`
+  - responsive two-column layout
+  - contact links for email, GitHub, and LinkedIn
+  - accessible form labels and required fields
+  - controlled form state
+  - email format validation
+  - field clearing after a valid submit
+- Added local feedback behavior:
+  - success toast for valid submit
+  - error toast for invalid email
+  - toast auto-dismiss after 3 seconds
+  - compact top-right toast layout with an X dismiss button
+- Built `Footer.jsx` with:
+  - navigation links from `siteConfig.navLinks`
+  - social links
+  - shared `HeroBackground`
+  - copyright line
+  - heart icon in the project credit text
+- Created reusable spotlight utilities:
+  - `src/components/ui/SpotLightLayer.jsx`
+  - `src/utils/spotlight.js`
+- Applied the spotlight hover effect to:
+  - Contact cards
+  - Project cards
+  - Skills cards
+
+Key decisions:
+
+- Real email sending is intentionally deferred until an email service or backend is chosen.
+- The Contact form is honest about its current behavior and does not pretend messages are sent.
+- Spotlight movement logic lives in `src/utils/spotlight.js` to avoid repeated mouse-position code.
+- The visual spotlight layer is reusable so the exact styling can stay consistent across cards.
 
 ---
 
@@ -180,12 +223,13 @@ Completed:
 - Hero
 - Skills
 - Projects
+- Contact UI
+- Footer
 
 Still pending:
 
-- Footer
 - Experience section
-- Contact section
+- Real email sending integration
 - Accessibility audit
 - Image optimization
 - Deployment

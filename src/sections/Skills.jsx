@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { skills } from "@/data/skills";
 import ScrollFloat from "@/lib/react-bits/ScrollFloat";
 import HeroBackground from "@/effects/HeroBackground";
+import SpotlightLayer from "@/components/ui/SpotlightLayer";
+import { handleSpotlightMove } from "@/utils/spotlight";
 
 function Skills() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -143,6 +145,7 @@ function Skills() {
                     key={uniqueKey}
                     onMouseEnter={() => setHoveredIndex(uniqueKey)}
                     onMouseLeave={() => setHoveredIndex(null)}
+                    onMouseMove={handleSpotlightMove}
                     style={{
                       borderColor: isHovered
                         ? `${skill.color}`
@@ -154,12 +157,13 @@ function Skills() {
                         ? "translateY(-6px) scale(1.03)"
                         : "translateY(0) scale(1)",
                     }}
-                    className="group bg-bg-card/30 border backdrop-blur-md rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center w-32 h-32 sm:w-48 sm:h-48 shrink-0 transition-all duration-300"
+                    className="group group/spotlight relative overflow-hidden bg-[#111211] border backdrop-blur-md rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center w-32 h-32 sm:w-48 sm:h-48 shrink-0 transition-all duration-300"
                   >
+                    <SpotlightLayer />
                     {/* Brand Logo - ALWAYS Colored */}
                     <div
                       style={{ color: skill.color }}
-                      className="transition-transform duration-300 group-hover:scale-105 pointer-events-none w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center"
+                      className="relative z-10 transition-transform duration-300 group-hover:scale-105 pointer-events-none w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center"
                     >
                       {skill.isSvgFile ? (
                         <img
@@ -173,7 +177,7 @@ function Skills() {
                     </div>
 
                     {/* Skill Name */}
-                    <span className="font-semibold text-sm sm:text-lg text-zinc-300 group-hover:text-white mt-3 sm:mt-4 px-2 transition-colors duration-300 truncate w-full pointer-events-none">
+                    <span className="relative z-10 font-semibold text-sm sm:text-lg text-zinc-300 group-hover:text-white mt-3 sm:mt-4 px-2 transition-colors duration-300 truncate w-full pointer-events-none">
                       {skill.name}
                     </span>
                   </div>
