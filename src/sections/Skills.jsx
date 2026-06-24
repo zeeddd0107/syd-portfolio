@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { skills } from "@/data/skills";
 import ScrollFloat from "@/lib/react-bits/ScrollFloat";
+import HeroBackground from "@/effects/HeroBackground";
 
 function Skills() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -72,15 +73,17 @@ function Skills() {
   };
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto flex flex-col items-center md:items-start">
+    <section id="skills" className="relative min-h-[50vh] overflow-hidden">
+      <HeroBackground />
+
+      <div className="relative z-10 mx-auto flex max-w-7xl md:translate-x-5 flex-col items-center px-6 md:items-start">
         {/* Subtle Category Label - Animated */}
         <motion.span
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-accent text-xs sm:text-sm font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase text-center md:text-left"
+          className="text-accent text-xs sm:text-sm font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase text-center md:text-left pt-25"
         >
           What I Work With
         </motion.span>
@@ -103,12 +106,8 @@ function Skills() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-        className="relative w-full overflow-hidden"
+        className="relative z-10 mx-auto w-full max-w-7xl overflow-hidden px-6 mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]"
       >
-        {/* Premium Edge Fading Overlays */}
-        <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-linear-to-r from-bg-dark to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-linear-to-l from-bg-dark to-transparent z-10 pointer-events-none" />
-
         {/* Horizontal Swipe/Scroll Track */}
         <div
           ref={scrollRef}
@@ -155,7 +154,7 @@ function Skills() {
                         ? "translateY(-6px) scale(1.03)"
                         : "translateY(0) scale(1)",
                     }}
-                    className="group bg-bg-card/40 border backdrop-blur-md rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center w-32 h-32 sm:w-48 sm:h-48 shrink-0 transition-all duration-300"
+                    className="group bg-bg-card/30 border backdrop-blur-md rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center w-32 h-32 sm:w-48 sm:h-48 shrink-0 transition-all duration-300"
                   >
                     {/* Brand Logo - ALWAYS Colored */}
                     <div
