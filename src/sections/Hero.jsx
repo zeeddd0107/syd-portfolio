@@ -13,17 +13,26 @@ function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15, // Stagger child animations by 0.15s
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: {
+      opacity: 0,
+      y: 34,
+      filter: "blur(8px)",
+    },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }, // Smooth custom ease curve
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.9,
+        ease: [0.16, 1, 0.3, 1],
+      },
     },
   };
 
@@ -52,8 +61,25 @@ function Hero() {
 
           {/* Main Name Heading */}
           <motion.h1
-            variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-accent tracking-tight mb-4"
+            variants={{
+              hidden: {
+                opacity: 0,
+                y: 42,
+                scale: 0.96,
+                filter: "blur(10px)",
+              },
+              visible: {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                filter: "blur(0px)",
+                transition: {
+                  duration: 1,
+                  ease: [0.16, 1, 0.3, 1],
+                },
+              },
+            }}
+            className="mb-4 text-4xl font-extrabold tracking-tight text-accent drop-shadow-[0_0_18px_rgba(0,255,153,0.12)] sm:text-5xl md:text-6xl"
           >
             {siteConfig.name}
           </motion.h1>

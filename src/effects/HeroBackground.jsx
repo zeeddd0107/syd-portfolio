@@ -14,7 +14,7 @@ const LAYERS = [
   { count: 20, depth: 80, sizeRange: [2.5, 4.0], opacityRange: [0.6, 1.0] }, // Close — wild & fast
 ];
 
-function HeroBackground() {
+function HeroBackground({ className = "-z-10" }) {
   const layerRefs = useRef([]);
   const mouse = useRef({ x: 0, y: 0 });
   const current = useRef({ x: 0, y: 0 });
@@ -94,7 +94,9 @@ function HeroBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
+    <div
+      className={`absolute inset-0 h-full w-full overflow-hidden pointer-events-none ${className}`}
+    >
       {layers.map((layer, layerIndex) => (
         <div
           key={layerIndex}

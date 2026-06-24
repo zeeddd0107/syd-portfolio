@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
-import { Navbar } from "@/components"; // 1. Import from our barrel file using path alias
+import { Navbar, Footer } from "@/components"; // Import from the barrel file using path alias
 import Hero from "@/sections/Hero";
 import Skills from "@/sections/Skills";
 import Projects from "@/sections/Projects";
+import Contact from "@/sections/Contact";
 
 function App() {
   // Initialize Lenis Smooth Scroll
@@ -33,7 +34,9 @@ function App() {
         <Hero />
         <Skills />
         <Projects />
+        <Contact />
       </main>
+      <Footer />
     </>
   );
 }

@@ -13,7 +13,7 @@ function Projects() {
       <HeroBackground />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 md:translate-x-5 md:px-6">
-        <div className="mb-10 text-center md:text-left">
+        <div className="mb-10 text-center">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -21,11 +21,11 @@ function Projects() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-xs font-semibold uppercase tracking-[0.15em] text-accent sm:text-sm sm:tracking-[0.2em]"
           >
-            Selected Work
+            What I've Built
           </motion.span>
 
           <ScrollFloat
-            containerClassName="mt-3 sm:mt-4 md:mt-2 mb-2 w-full text-center md:text-left"
+            containerClassName="mt-3 mb-2 w-full text-center sm:mt-4 md:mt-2"
             textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight"
             stagger={0.02}
             ease="power2.out"
@@ -39,7 +39,7 @@ function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-            className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-body sm:text-base md:mx-0 md:text-lg"
+            className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-body sm:text-base md:text-lg"
           >
             A cross-section of platforms, tools, and architectures — from
             passion projects to polished applications.

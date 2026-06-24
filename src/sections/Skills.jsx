@@ -76,21 +76,21 @@ function Skills() {
     <section id="skills" className="relative min-h-[50vh] overflow-hidden">
       <HeroBackground />
 
-      <div className="relative z-10 mx-auto flex max-w-7xl md:translate-x-5 flex-col items-center px-6 md:items-start">
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 md:translate-x-5">
         {/* Subtle Category Label - Animated */}
         <motion.span
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-accent text-xs sm:text-sm font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase text-center md:text-left pt-25"
+          className="pt-25 text-center text-xs font-semibold uppercase tracking-[0.15em] text-accent sm:text-sm sm:tracking-[0.2em]"
         >
-          What I Work With
+          My Toolkit
         </motion.span>
 
         {/* Animated Heading using ScrollFloat */}
         <ScrollFloat
-          containerClassName="mt-3 sm:mt-4 md:mt-2 mb-2 w-full text-center md:text-left"
+          containerClassName="mt-3 mb-2 w-full text-center sm:mt-4 md:mt-2"
           textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight"
           stagger={0.02}
           ease="power2.out"

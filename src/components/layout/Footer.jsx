@@ -1,0 +1,99 @@
+import { Heart } from "lucide-react";
+import { siteConfig } from "@/constants/siteConfig";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import HeroBackground from "@/effects/HeroBackground";
+
+function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="relative isolate overflow-hidden border-t border-border-subtle bg-[#0b0b0b] px-5 py-10 md:px-6">
+      <div className="absolute inset-0 z-0">
+        <HeroBackground className="z-0" />
+      </div>
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-10 md:translate-x-5 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+        <div>
+          <a
+            href="#home"
+            className="inline-flex text-2xl font-extrabold tracking-tight text-accent transition-opacity duration-300 hover:opacity-80"
+            aria-label="Back to home"
+          >
+            {siteConfig.name}
+          </a>
+
+          <p className="mt-4 max-w-md text-sm leading-7 text-body">
+            Passionate about building modern, accessible, and meaningful digital
+            experiences.
+          </p>
+        </div>
+
+        <nav aria-label="Footer navigation">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-white">
+            Navigate
+          </h2>
+
+          <ul className="mt-4 space-y-3">
+            {siteConfig.navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-sm text-body transition-colors duration-300 hover:text-accent"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-white">
+            Connect
+          </h2>
+
+          <ul className="mt-4 space-y-3">
+            <li>
+              <a
+                href={siteConfig.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-body transition-colors duration-300 hover:text-accent"
+              >
+                <GithubIcon size={16} aria-hidden="true" />
+                GitHub
+              </a>
+            </li>
+
+            <li>
+              <a
+                href={siteConfig.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-body transition-colors duration-300 hover:text-accent"
+              >
+                <LinkedinIcon size={16} aria-hidden="true" />
+                LinkedIn
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto mt-10 flex max-w-7xl flex-col gap-2 border-t border-border-subtle pt-6 text-sm text-zinc-500 md:translate-x-5 md:flex-row md:items-center md:justify-between">
+        <p>
+          © {currentYear} {siteConfig.name}
+        </p>
+        <p className="inline-flex items-center gap-1.5">
+          Built with React, Vite, Tailwind CSS and{" "}
+          <Heart
+            size={14}
+            className="fill-red-500 text-red-500"
+            aria-hidden="true"
+          />
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+export default Footer;
