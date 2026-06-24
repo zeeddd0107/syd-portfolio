@@ -28,14 +28,17 @@ function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-[90vh] flex items-center py-12">
+    <section
+      id="home"
+      className="relative flex min-h-[90vh] items-center overflow-hidden py-12"
+    >
       {/* Galaxy background — sits behind all content via -z-10 */}
       <HeroBackground />
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+        className="relative z-10 mx-auto grid w-full max-w-7xl md:translate-x-5 grid-cols-1 items-center gap-12 px-6 lg:grid-cols-12"
       >
         {/* Left Column: Text Info (takes 7 cols on large screens) */}
         <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left">

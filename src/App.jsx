@@ -3,6 +3,7 @@ import Lenis from "lenis";
 import { Navbar } from "@/components"; // 1. Import from our barrel file using path alias
 import Hero from "@/sections/Hero";
 import Skills from "@/sections/Skills";
+import Projects from "@/sections/Projects";
 
 function App() {
   // Initialize Lenis Smooth Scroll
@@ -28,10 +29,10 @@ function App() {
   return (
     <>
       <Navbar />
-      <main className="max-w-7xl mx-auto px-6 pt-24">
+      <main className="pt-24">
         <Hero />
         <Skills />
-        <Hero />
+        <Projects />
       </main>
     </>
   );

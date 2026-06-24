@@ -1,85 +1,130 @@
 # Project Tech Stack
 
-This document lists and explains the core technologies, libraries, and tools used to build the Premium Portfolio.
+This document explains the technologies, libraries, and architecture patterns used in the Premium Portfolio.
 
 ---
 
-## 💻 Core Development Stack
+## Core Development Stack
 
-| Technology | Category | Version | Purpose |
-|---|---|---|---|
-| **React** | Frontend Library | ^19.2.6 | Core framework for UI component composition, state management, and declarative rendering. |
-| **Vite** | Build Tool & Dev Server | ^8.0.12 | Blazing-fast development server with Native ES Modules (HMR) and Rollup-based production builder. |
-| **JavaScript (ES6+)** | Language | — | Native language used for application logic, utilities, and components. |
-
----
-
-## 🎨 Styling & Presentation
-
-| Library | Category | Version | Purpose |
-|---|---|---|---|
-| **Tailwind CSS v4** | CSS Framework | ^4.3.1 | Utility-first CSS compiling theme configurations directly through the `@theme` directive in CSS. |
-| **@tailwindcss/vite** | Vite Plugin | ^4.3.1 | Vite-specific compiler plugin that integrates Tailwind v4 into the Vite build pipeline. |
-| **Poppins** | Typography | — | Modern, professional sans-serif font family imported from Google Fonts for global typography. |
+| Technology | Category | Purpose |
+|---|---|---|
+| React 19 | Frontend library | Component composition, state, hooks, and declarative rendering |
+| Vite | Build tool | Fast dev server, HMR, and production bundling |
+| JavaScript ES6+ | Language | App logic, data models, and components |
 
 ---
 
-## 🎬 Animations & Scroll Mechanics
+## Styling and Presentation
 
-| Library | Category | Version | Purpose |
-|---|---|---|---|
-| **Framer Motion** | Animation Library | ^12.40.0 | Handles entrance animations, staggered lists, hover scales, and the rotating character-by-character subtitle effect. |
-| **GSAP (ScrollTrigger)** | Animation Library | ^3.x | Used for the `ScrollFloat` character-by-character heading reveal animation with one-shot viewport triggering (`once: true`) and `gsap.context()` lifecycle cleanup. |
-| **Lenis** | Smooth Scroll | ^1.3.23 | Normalizes browser scroll speed and momentum to deliver a premium, fluid scrolling experience. |
+| Technology | Category | Purpose |
+|---|---|---|
+| Tailwind CSS v4 | CSS framework | Utility-first styling with CSS `@theme` design tokens |
+| `@tailwindcss/vite` | Vite plugin | Tailwind v4 compiler integration |
+| Poppins | Typography | Global sans-serif font |
 
----
-
-## 🛠️ Utilities & Helpers
-
-| Library | Category | Version | Purpose |
-|---|---|---|---|
-| **Lucide React** | Icons | ^1.21.0 | Clean, modern SVG icon library compiled as native React components. |
-| **clsx** | Utility | ^2.1.1 | Helper to dynamically combine conditionally applied CSS class strings in React components. |
-| **tailwind-merge** | Utility | ^3.6.0 | Prevents Tailwind class duplication and overrides (e.g. resolving `p-2` and `p-4` conflicts dynamically). |
+Design tokens live in [globals.css](./src/styles/globals.css). Component-level one-off values are used sparingly when a surface needs tuned contrast, such as project and modal cards using `#121111`.
 
 ---
 
-## 📨 Forms & Integrations
+## Animation and Scroll
 
-| Library | Category | Version | Purpose |
-|---|---|---|---|
-| **React Hook Form** | Form Management | *(planned)* | Optimizes form state management by using uncontrolled inputs to minimize re-renders. |
-| **Zod** | Validation | *(planned)* | Schema-based validation tool that integrates with React Hook Form to ensure input safety. |
-| **EmailJS** | Email Delivery | *(planned)* | Send email submissions directly from the client-side contact form to your inbox without requiring a custom backend. |
+| Library | Purpose |
+|---|---|
+| Framer Motion | Entrance animations, hover states, cards, modal transitions, and typewriter character motion |
+| GSAP ScrollTrigger | `ScrollFloat` heading reveal animation |
+| Lenis | Smooth page scrolling |
 
 ---
 
-## 📁 Source Architecture
+## Icons and Assets
 
-The `src/` directory is organized by role, not by feature:
+| System | Purpose |
+|---|---|
+| Lucide React | Generic UI icons such as arrows, menu, close, external link, and carousel chevrons |
+| Custom SVG icon components | Brand-safe social icons and Express icon |
+| SVG logo files | Technology icons for Skills and Projects |
+| Project screenshots | Stored in `src/assets/images/projects/` and imported through project data |
+
+---
+
+## Source Architecture
 
 | Directory | Contains | Convention |
 |---|---|---|
-| `src/sections/` | Full-page section components (Hero, Skills, etc.) | One file per section, named in PascalCase |
-| `src/components/layout/` | Structural shell components (Navbar, Footer) | Shared across all pages |
-| `src/components/ui/` | Primitive/generic UI utilities (icons, typewriter) | Stateless or minimally stateful |
-| `src/components/cards/` | Data-driven card display components | Receives data via props |
-| `src/components/buttons/` | Custom button variants | Wraps `<a>` or `<button>` |
-| `src/effects/` | DOM/canvas visual effect components | Not content — purely decorative, pointer-events-none |
-| `src/constants/` | Static site config and metadata | JS objects; no JSX |
-| `src/data/` | Dynamic content arrays (social links, skills, etc.) | JS arrays/objects; no JSX |
-| `src/lib/` | Third-party wrappers and utility factories | e.g. `cn()` from clsx + tailwind-merge; React Bits components |
-| `src/lib/react-bits/` | React Bits third-party animation components | e.g. `ScrollFloat.jsx` — treat as read-only vendor code |
-| `src/assets/images/logos/` | Brand technology SVG logo files | One SVG per technology, kebab-case named |
-| `src/styles/` | Global CSS entry file | `globals.css` only — no component-level CSS files |
-| `src/utils/` | Custom pure utility functions | Reserved for future use |
+| `src/sections/` | Page sections such as Hero, Skills, and Projects | One file per major section |
+| `src/components/layout/` | App-level structural components | Navbar now, Footer later |
+| `src/components/cards/` | Data-driven card components | Receives data and callbacks through props |
+| `src/components/ui/` | Reusable UI primitives | Icons, modals, typewriter effect |
+| `src/data/` | Content arrays and mappings | Plain JS data, no JSX except icon component references where needed |
+| `src/constants/` | Site-wide config | Navigation, name, bio, resume URL |
+| `src/effects/` | Decorative visual effects | Pointer-events disabled, non-content visuals |
+| `src/lib/` | Utility wrappers and vendor components | `cn()` helper and React Bits `ScrollFloat` |
+| `src/styles/` | Global CSS | Tailwind import, theme tokens, keyframes, resets |
 
 ---
 
 ## Current Interaction Architecture
 
-- **Navbar scroll behavior:** React `useState`, `useEffect`, and `useRef` track visibility, previous scroll position, navigation locks, mobile-menu state, and the active section.
-- **Active-section tracking:** `siteConfig.navLinks` is the single source of truth. Existing section elements are detected by their hash IDs, so future sections participate automatically when matching IDs are rendered.
-- **Hero subtitle animation:** `siteConfig.titles` stores plain strings; `TypewriterEffect` owns phrase rotation and character animation.
-- **Responsive styling:** Tailwind mobile-first classes reduce the Skills heading, card, icon, typography, and carousel spacing below the `sm` breakpoint without changing desktop presentation.
-- **Theme control:** The Navbar currently exposes an accessible disabled-state placeholder only. Theme switching is intentionally not implemented yet.
+### Navbar
+
+- `siteConfig.navLinks` controls rendered navigation items.
+- The Experience tab is currently hidden until that section is ready.
+- Scroll direction determines Navbar visibility.
+- A navigation lock prevents anchor-link clicks from being treated as manual downward scrolling.
+- Active section tracking reads rendered section offsets from the nav link hashes.
+- The theme toggle is present as a placeholder only.
+
+### Hero
+
+- `siteConfig.name` renders as the stable `<h1>`.
+- `siteConfig.titles` powers the subtitle `TypewriterEffect`.
+- `HeroBackground` is the shared parallax star field used by Hero, Skills, and Projects.
+- The app uses a full-width `<main>` and section-level inner wrappers for alignment.
+
+### Skills
+
+- `skills.js` stores name, icon, SVG/component routing, and brand color.
+- The carousel renders the skills list twice for seamless looping.
+- `requestAnimationFrame` controls continuous scroll.
+- Hover and drag states pause or override auto-scroll.
+- Cards use brand-colored border/glow hover styles.
+- The carousel uses a CSS mask fade instead of dark overlay divs.
+
+### Projects
+
+- `projects.js` stores project metadata, project type, grid size, screenshot, optional gallery images, GitHub URL, live URL, and technology stack.
+- `ProjectCard` is preview-focused:
+  - clickable whole card
+  - keyboard activation
+  - screenshot/placeholder
+  - title, description, technology pills
+  - View button
+- `Projects.jsx` owns selected-project state and renders `ProjectModal`.
+- `ProjectModal` is detail-focused:
+  - body scroll lock
+  - sticky title bar
+  - backdrop click-to-close
+  - mouse-wheel scroll inside modal content
+  - optional multi-image gallery with arrows and dots
+  - GitHub and optional Live Demo actions
+  - technology logo list
+
+### Data Model Notes
+
+- `image` is the card thumbnail.
+- `images` is optional and powers the modal gallery.
+- `githubUrl` remains in data even when the card does not show a GitHub icon.
+- `liveUrl` controls whether the Live Demo action appears.
+- `size` controls Bento grid span behavior.
+
+---
+
+## Planned Integrations
+
+| Library / Feature | Status | Purpose |
+|---|---|---|
+| React Hook Form | Planned | Contact form state |
+| Zod or simple validation | Planned | Contact form validation |
+| EmailJS or alternative | Planned | Client-side contact message delivery |
+| Lighthouse audit | Planned | Accessibility and performance verification |
+| Image optimization / WebP | Planned | Reduce screenshot and asset weight |

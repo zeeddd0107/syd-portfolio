@@ -1,181 +1,191 @@
 # Project Process Log
 
-This document tracks the step-by-step progress of building the Premium Portfolio. It acts as a reference for the setup, decisions made, and phases completed.
+This document records the build process, decisions, and phase outcomes for the Premium Portfolio project.
 
 ---
 
-## 🛠️ Phases & Steps Completed
+## Phase 1: Project Setup
 
-### Phase 1: Project Setup (Vite + React)
-*   **Scaffolding the Project:**
-    *   Initialized the React project inside the project root using Vite:
-        ```bash
-        npx -y create-vite@latest . --template react
-        ```
-    *   Installed baseline dependencies using `npm install`.
-*   **Entry Points & Architecture Discovery:**
-    *   Analyzed `index.html` as the true entry point of the Vite app.
-    *   Understood how `src/main.jsx` utilizes React 19's `createRoot` and mounts `<App />` within `<div id="root">` inside `index.html`.
-    *   Discussed the importance of keeping `StrictMode` enabled in development to catch potential bugs and lifecycle issues.
-*   **Boilerplate Cleanup:**
-    *   Deleted default Vite/React assets: `src/App.css`, `src/assets/react.svg`, and `public/vite.svg`.
-    *   Cleared out `src/index.css` to prepare it for global Tailwind styling.
-    *   Rewrote `src/App.jsx` with a clean, minimal placeholder.
-*   **Git Repository Isolation:**
-    *   Discovered Git was tracking the user's home directory (`C:\Users\sydney`) instead of the project directory.
-    *   Isolated the project by initializing Git directly inside the project root:
-        ```bash
-        git init
-        ```
-*   **Linking and Pushing to GitHub:**
-    *   Renamed default branch to `main`:
-        ```bash
-        git branch -M main
-        ```
-    *   Linked the local repository to a remote repository on GitHub:
-        ```bash
-        git remote add origin <github-repo-url>
-        ```
-    *   Pushed local commits to the remote origin and set upstream:
-        ```bash
-        git push -u origin main
-        ```
+- Created the React project with Vite.
+- Installed baseline dependencies.
+- Removed default Vite boilerplate.
+- Reset the app entry files for a clean custom build.
+- Initialized Git inside the project directory instead of the user home directory.
+- Connected the project to a GitHub remote.
 
+---
 
-### Phase 2: Install & Configure Dependencies (Complete)
-*   **Library Installation:**
-    *   Installed core libraries for styling, animation, smoothing, and utilities:
-        ```bash
-        npm install tailwindcss @tailwindcss/vite framer-motion lenis lucide-react clsx tailwind-merge
-        ```
-*   **Tailwind CSS v4 Configuration:**
-    *   Configured Vite to use the Tailwind v4 compiler plugin in `vite.config.js`.
-    *   Imported Tailwind into the CSS entry point `src/index.css` using `@import "tailwindcss";`.
-*   **Environment Verification:**
-    *   Updated `src/App.jsx` with temporary Tailwind utility classes (`min-h-screen`, `bg-neutral-950`, `flex`, `text-emerald-400`, etc.) to confirm compilation and styling works.
+## Phase 2: Dependencies and Tooling
 
-### Phase 3: Folder Structure & Design System (Complete)
-*   **Folder Structure Restructuring:**
-    *   Created subdirectories inside `src/` to support scalable architecture:
-        ```powershell
-        mkdir src/components/ui, src/components/layout, src/components/cards, src/components/buttons, src/constants, src/data, src/utils, src/styles
-        ```
-    *   Relocated `src/index.css` to `src/styles/globals.css` and updated its import inside `src/main.jsx`.
-*   **Path Alias (`@/`) Configuration:**
-    *   Configured Vite's resolver in `vite.config.js` to map `@/` to the `./src` directory.
-    *   Created a standard `jsconfig.json` file to enable VS Code auto-import and IntelliSense path matching, resolved without the deprecated `baseUrl` parameter for compatibility with TypeScript 6.0+.
-*   **Tailwind CSS v4 Custom Theme:**
-    *   Configured custom design tokens (Poppins font, colors like `#00FF99` accent, dark backgrounds, elevated layout boundaries, subtle/accent borders, and custom box shadow glows) directly in `src/styles/globals.css` using the new `@theme` directive.
-    *   Added standard body resets and enabled antialiasing.
-*   **Linter Integration Configuration:**
-    *   Resolved CSS linting issues in VS Code for custom `@theme` and `@utility` rules by adding `css.lint.unknownAtRules: "ignore"` to a new project-level `.vscode/settings.json` file.
+- Installed the core frontend stack:
+  - React
+  - Vite
+  - Tailwind CSS v4
+  - Framer Motion
+  - Lenis
+  - Lucide React
+  - clsx
+  - tailwind-merge
+- Configured `@tailwindcss/vite` in `vite.config.js`.
+- Set up Tailwind through `src/styles/globals.css`.
 
-### Phase 4: Navigation & Layout (In Progress)
-*   **Lenis Smooth Scroll Integration:**
-    *   Configured Lenis smooth scrolling inside a `useEffect` hook in `src/App.jsx` running on a browser `requestAnimationFrame` animation frame loop.
-*   **Central Config & Data Separation:**
-    *   Created `src/constants/siteConfig.js` for portfolio metadata (name, rotating titles, email, and navigation path URLs).
-    *   Created `src/data/socialLinks.js` for social profile details and Lucide icon mappings.
-*   **Navbar Component & Barrel Export:**
-    *   Built the initial responsive glassmorphic navigation bar in `src/components/layout/Navbar.jsx` with desktop links, mobile-menu state, and active section highlights.
-    *   Configured barrel exports inside `src/components/index.js` to enable clean named imports.
-    *   Rendered the `<Navbar />` inside `src/App.jsx`, adjusting layout spacing with top padding.
-*   **Navbar Layout Refinements:**
-    *   Removed the "Let's Talk" CTA buttons (both the desktop button and the mobile menu drawer version) to keep the navigation cleaner.
-    *   Relied on the flexbox layout container's `justify-between` utility class to automatically align the remaining desktop navigation items to the far right, matching the responsive theme.
-*   **Floating Smart Navbar Redesign:**
-    *   Reworked the full-width bar into a compact, top-centered glassmorphic pill while preserving the project color tokens.
-    *   Removed the `SJ.` brand text and replaced underline indicators with rounded active-link pills.
-    *   Added scroll-direction detection with `useRef`: manual scroll-down hides the Navbar and scroll-up reveals it.
-    *   Added a navigation lock so anchor-link smooth scrolling keeps the Navbar visible instead of being mistaken for manual downward scrolling.
-    *   Added data-driven active-section tracking based on `siteConfig.navLinks` and section offsets; future sections work automatically when their matching IDs are rendered.
-    *   Replaced the mobile fullscreen drawer with a centered responsive glass dropdown and improved `aria-label`/`aria-expanded` behavior.
-    *   Added an accessible theme-toggle placeholder; visual UI is present, but theme switching is intentionally deferred.
-*   **Remaining Layout Work:**
-    *   Footer creation, export, and App integration remain pending.
+---
 
-### Phase 5: Hero / About Section (Complete)
-*   **Decoupled Site Bio:**
-    *   Updated `siteConfig.js` to include the professional portfolio bio text.
-*   **Visual Asset Scaffolding:**
-    *   Created a custom, theme-compliant professional developer profile avatar (`developer_avatar.png`) inside `src/assets/images/profile/`.
-*   **Custom Brand Icons:**
-    *   Created `src/components/ui/icons.jsx` to export standalone `GithubIcon` and `LinkedinIcon` SVG components.
-    *   This was necessary because `lucide-react` v1.0.0+ removed all brand/logo icons for trademark compliance.
-    *   Updated `src/data/socialLinks.js` to import from this local file instead of `lucide-react`.
-*   **TypewriterEffect Component:**
-    *   Built a reusable `TypewriterEffect` component at `src/components/ui/typewriter-effect.jsx`.
-    *   Uses Framer Motion's `useAnimate` + `stagger` to reveal characters one at a time with a configurable 0.06s per-character delay.
-    *   Uses `useInView` to trigger the animation only when the component enters the viewport.
-    *   Refactored the component to accept a plain `phrases` array and rotate to the next phrase after each reverse fade-out.
-    *   Loops every 8 seconds: fades out characters in reverse, advances with modulo indexing, pauses 300ms, then types the next phrase.
-    *   Renders a blinking accent-colored cursor block after the animation completes.
-*   **Hero Typography Refinement:**
-    *   Removed the repeating typewriter animation from the developer name and restored it as a stable semantic `<h1>`.
-    *   Moved the rotating animation to the professional subtitle.
-    *   Stored five phrases in `siteConfig.titles`: Aspiring Full-Stack Developer, Curious by Nature, Pragmatic, Simplicity First, and Building With Purpose.
-    *   Tuned cursor spacing responsively while keeping it visible on mobile.
-*   **HeroBackground Effect:**
-    *   Built an interactive multi-layer parallax star field in `src/effects/HeroBackground.jsx`.
-    *   Stars are organized into 3 depth layers: Far (80 stars, slow), Mid (50 stars, medium), Close (20 stars, fast).
-    *   Star positions, sizes, opacities, and twinkle timing are generated deterministically using a `seededRandom()` function (no random re-renders on hot reload).
-    *   A `mousemove` listener updates a ref (`mouse.current`) with normalized coordinates; a `requestAnimationFrame` loop lerps a smoothed position ref (`current.current`) toward the target for lag-feel parallax.
-    *   Each layer div is translated independently using `depth × current mouse position + auto-orbit offset` for a natural floating galaxy effect.
-    *   Positioned with `absolute inset-0 -z-10` so it sits behind all Hero content without capturing pointer events.
-*   **Animated Hero Component:**
-    *   Implemented the unified Hero + About screen component in `src/sections/Hero.jsx`.
-    *   Configured hardware-accelerated entrance animations using Framer Motion (staggered container children with custom cubic-bezier ease curves `[0.16, 1, 0.3, 1]`).
-    *   Built a split columns responsive grid (text left `lg:col-span-7`, floating spring-hover photo right `lg:col-span-5`).
-    *   Imported and displayed the new custom brand icon components for error-free loading.
-*   **Integration:**
-    *   Rendered `<Hero />` inside the root `<main>` layout container in `App.jsx`.
-*   **Design and Color System Customization:**
-    *   Configured a custom `--color-secondary: #E7E7E7` color token directly in `globals.css` to represent secondary body typography.
-    *   Applied this design token as the Tailwind v4 utility class `text-secondary` to the Hero component's bio paragraph, improving reading legibility on deep background contrast.
+## Phase 3: Structure and Design System
 
-### Phase 6: Skills Section (Complete)
-*   **Skills Data Model:**
-    *   Created `src/data/skills.js` to define the full list of 15 technologies (Python, Java, C#, ASP.NET Core, React, JavaScript, Tailwind CSS, HTML5, CSS3, Git, GitHub, Postman, Firebase, Express, Node.js).
-    *   Each skill entry stores `name`, `icon` (SVG path string or JSX component reference), `isSvgFile` (boolean), and `color` (brand hex color).
-    *   Used the `isSvgFile` flag to switch between rendering an `<img>` tag (for SVG file assets) and a JSX React component (for custom-drawn inline icons).
-*   **SVG Icon Assets:**
-    *   Created `src/assets/images/logos/` as the canonical folder for all brand technology SVG logo files.
-    *   Added 15 individual SVG files: `csharp.svg`, `css.svg`, `dotnetcore.svg`, `express.svg`, `firebase.svg`, `git.svg`, `github.svg`, `html.svg`, `java.svg`, `javascript.svg`, `nodejs.svg`, `postman.svg`, `python.svg`, `react.svg`, `tailwind.svg`.
-    *   Updated `express.svg` to use `fill="currentColor"` to enable dynamic color inheritance.
-*   **Custom Icon Components:**
-    *   Extended `src/components/ui/icons.jsx` with a custom `ExpressIcon` JSX component rendered using the official Express.js logo SVG path and `fill="currentColor"`.
-    *   This ensures Express matches the visual style of the `GithubIcon` and `LinkedinIcon` already in the file.
-*   **Skills Section Component:**
-    *   Built `src/sections/Skills.jsx` with the following features:
-        *   **Seamless Auto-Scroll Carousel:** Uses a `requestAnimationFrame` loop to continuously increment `scrollLeft` at `0.8px/frame`. The skills list is rendered twice side-by-side (`Array.from({ length: 2 }).map(...)`) so when the first copy ends, `scrollLeft` resets to the start of the second copy without any visible jump.
-        *   **Hover Pause:** The carousel stops scrolling when the user hovers over the container (`isHoveredContainer` ref).
-        *   **Click-and-Drag Scrolling:** `onMouseDown`, `onMouseMove`, and `onMouseUp` handlers implement desktop drag-to-scroll with a `1.5×` sensitivity multiplier and seamless loop correction during drag.
-        *   **Dynamic Icon Rendering:** Checks `skill.isSvgFile` to render either `<img src={skill.icon} />` for SVG assets or `<Icon size={52} />` for JSX components.
-        *   **Per-Card Hover Effects:** Each skill card independently tracks `hoveredIndex`, applying brand color glow (`boxShadow`), border highlight, and `translateY(-6px) scale(1.03)` lift using `style` props.
-        *   **Edge Fade Overlays:** Left and right gradient overlays mask the carousel edges for a premium polished look.
-*   **ScrollFloat Animation (Heading):**
-    *   Integrated the React Bits `ScrollFloat` GSAP component at `src/lib/react-bits/ScrollFloat.jsx` for the "Skills & Technologies" heading.
-    *   **Bug Fix — Animation Reversal:** The original `scrub: true` config caused the animation to reverse on scroll-up. Replaced with `once: true` (animation plays exactly once when element enters viewport).
-    *   **Bug Fix — React StrictMode Double-Mount:** The original `useEffect` had no cleanup function. React 18 Strict Mode mounts effects twice, creating two competing animations. Fixed by wrapping the animation in `gsap.context()` and returning `ctx.revert()` as cleanup.
-    *   **Bug Fix — Early Trigger:** Default `scrollStart = "center bottom+=50%"` caused the trigger to fire while still below the viewport. Overridden at call site with `scrollStart="top bottom"` for immediate entry-based triggering.
-    *   **Performance Improvement:** Changed ease from `back.inOut(2)` (slow ramp-up) to `power2.out` (starts at full speed). Reduced stagger from `0.04s` to `0.02s` per character for snappier reveal.
-*   **Framer Motion Entrance Animations:**
-    *   Wrapped the `"What I Work With"` subtitle label in a `<motion.span>` with `initial={{ opacity: 0, y: 15 }}` and `whileInView={{ opacity: 1, y: 0 }}` (viewport `once: true`).
-    *   Wrapped the carousel container in a `<motion.div>` with `initial={{ opacity: 0, y: 30 }}` and `whileInView={{ opacity: 1, y: 0 }}` (viewport `once: true`, `delay: 0.1s`).
-    *   Both animations use `easeOut` easing and play only once, preserving the final state when scrolling back up.
-*   **JSX Error Fix:**
-    *   Resolved `JSX elements cannot have multiple attributes with the same name` lint error on line 107 caused by two `onMouseLeave` attributes on the scroll container. Merged them into a single unified handler.
-*   **Mobile Responsiveness Refinement:**
-    *   Scaled the `"What I Work With"` label and reduced tracking on narrow screens.
-    *   Added a fluid `clamp()` size for the ScrollFloat heading, centered it on mobile, and preserved desktop alignment.
-    *   Tuned label-to-heading spacing independently for mobile and desktop.
-    *   Reduced mobile skill cards from the desktop `12rem` size to `8rem`, with smaller icons, typography, corner radius, and carousel gaps.
-    *   Preserved the existing desktop card dimensions and interactions from the `sm` breakpoint upward.
+- Created a scalable `src/` structure by responsibility:
+  - `components/`
+  - `sections/`
+  - `data/`
+  - `constants/`
+  - `effects/`
+  - `lib/`
+  - `styles/`
+- Added the `@/` import alias.
+- Added `jsconfig.json` for editor path support.
+- Defined Tailwind v4 design tokens in `globals.css`.
+- Added VS Code settings to ignore Tailwind v4 custom at-rule warnings.
 
-### Phase 7: Projects Section (Planned)
-*   Use a data-driven `src/data/projects.js` model and reusable `ProjectCard.jsx`.
-*   Build an original responsive Bento Grid with no more than three cards per row.
-*   Allow website projects to span wider columns while utilities, APIs, mobile apps, and tools use standard tiles.
-*   Include screenshots, title, concise description, technology stack, icon-based GitHub action, and optional Live Demo action.
-*   Use lazy-loaded screenshots, semantic links, descriptive alternative text, keyboard-visible focus states, and restrained Framer Motion interactions.
-*   Treat external portfolios only as inspiration; do not reproduce their layout, styling, motion, spacing, or interactions one-to-one.
+---
+
+## Phase 4: Navigation and Layout
+
+- Integrated Lenis smooth scrolling in `App.jsx`.
+- Created `siteConfig.js` as the single source of truth for metadata and navigation links.
+- Built the centered floating glassmorphic Navbar.
+- Removed the previous top-left brand text.
+- Added scroll-aware behavior:
+  - scroll down hides the Navbar
+  - scroll up reveals the Navbar
+  - anchor navigation keeps it visible
+- Added data-driven active-section tracking.
+- Added responsive mobile dropdown.
+- Added placeholder-only theme toggle UI with accessible labeling.
+- Removed the Experience tab for now because the section is deferred.
+- Footer remains pending.
+
+---
+
+## Phase 5: Hero / About
+
+- Added the professional bio and title phrases to `siteConfig.js`.
+- Kept `Sydney Jimenez` stable in a semantic `<h1>`.
+- Moved the animated typewriter effect to the subtitle.
+- Created a rotating subtitle list:
+  - Aspiring Full-Stack Developer
+  - Curious by Nature
+  - Pragmatic
+  - Simplicity First
+  - Building With Purpose
+- Tuned the cursor for desktop and mobile spacing.
+- Added the profile avatar asset.
+- Created custom SVG social icons because Lucide no longer ships brand icons.
+- Built the responsive two-column Hero layout with Framer Motion entrance animations.
+- Built `HeroBackground.jsx`, a multi-layer mouse-responsive parallax star field.
+- Updated the app structure so `main` is full-width while each section owns its own constrained content wrapper.
+
+Key decision:
+
+- Full-width visual backgrounds should belong to sections.
+- Content alignment should be handled by inner `max-w-7xl` wrappers.
+
+---
+
+## Phase 6: Skills
+
+- Created `skills.js` as a data-driven list of technologies.
+- Added SVG technology assets under `src/assets/images/logos/`.
+- Built `Skills.jsx` with:
+  - seamless auto-scrolling carousel
+  - hover pause
+  - click-and-drag scrolling
+  - brand-colored hover border/glow
+  - responsive mobile card sizing
+- Integrated `ScrollFloat` for the heading.
+- Fixed `ScrollFloat` behavior:
+  - no reverse animation on scroll-up
+  - proper cleanup for React StrictMode
+  - better trigger timing
+- Applied `HeroBackground` to the Skills section.
+- Constrained the carousel to `max-w-7xl`.
+- Replaced hard overlay fades with a CSS mask fade so cards fade naturally without black edge blocks.
+- Tuned mobile spacing and right padding.
+- Updated skill card surface color for a more consistent dark card look.
+
+Key decision:
+
+- The star background fills the full section, but the heading and carousel remain constrained for layout discipline.
+
+---
+
+## Phase 7: Projects
+
+- Created `src/data/projects.js`.
+- Added GymPlify as the real featured project.
+- Added placeholder concept projects for layout balance:
+  - DevTrack
+  - API Pulse
+  - Campus Connect
+- Added project screenshot assets under `src/assets/images/projects/`.
+- Created `projectTechnologyIcons.js` for icon mapping across project tech stacks.
+- Built `ProjectCard.jsx`:
+  - screenshot / placeholder preview
+  - title
+  - description
+  - technology pills with icons
+  - View button
+  - whole-card click behavior
+  - keyboard support
+  - hover border/glow
+- Removed the direct GitHub action from the card, but preserved `githubUrl` in project data.
+- Built `Projects.jsx` with a responsive Bento-style grid:
+  - wide website cards
+  - standard utility/tool cards
+  - max three-card visual rhythm on large screens
+  - mobile-first one-column layout
+- Added `ProjectModal.jsx`:
+  - scroll-locked backdrop
+  - sticky title header
+  - close button
+  - backdrop click-to-close
+  - mouse-wheel modal scrolling
+  - GitHub action inside modal
+  - optional Live Demo action
+  - technology logo section
+  - screenshot gallery with arrows and dots when multiple images exist
+- Applied the shared `HeroBackground` to Projects.
+- Tuned project mobile responsiveness:
+  - safer section padding
+  - better screenshot object positioning
+  - smaller mobile description and technology pills
+  - modal left untouched after it was confirmed working well
+
+Key decisions:
+
+- `image` remains the card thumbnail.
+- Optional `images` powers the modal gallery.
+- `githubUrl` stays in `projects.js` even when GitHub is not shown on the card.
+- Project detail actions belong in the modal, not the preview card.
+
+---
+
+## Current State
+
+Completed:
+
+- Project setup
+- Tooling
+- Design system
+- Smart Navbar
+- Hero
+- Skills
+- Projects
+
+Still pending:
+
+- Footer
+- Experience section
+- Contact section
+- Accessibility audit
+- Image optimization
+- Deployment
