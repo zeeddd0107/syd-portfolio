@@ -103,7 +103,7 @@ function HeroBackground({ className = "-z-10" }) {
           ref={(el) => (layerRefs.current[layerIndex] = el)}
           style={{
             position: "absolute",
-            inset: "-100px", // Large inset so fast layers don't clip
+            inset: "-100px",
             willChange: "transform",
           }}
         >
@@ -117,13 +117,13 @@ function HeroBackground({ className = "-z-10" }) {
                 width: `${star.size}px`,
                 height: `${star.size}px`,
                 borderRadius: "50%",
-                backgroundColor: "white",
+                backgroundColor: "var(--particle-color)",
                 opacity: star.opacity,
                 animation: `twinkle ${star.duration}s ease-in-out ${star.delay}s infinite alternate`,
                 boxShadow: star.flare
-                  ? `0 0 ${star.size * 4}px ${star.size}px rgba(255,255,255,0.8),
-                     0 0 ${star.size * 8}px ${star.size * 3}px rgba(0,255,153,0.2)`
-                  : `0 0 ${star.size * 2}px rgba(255,255,255,0.4)`,
+                  ? `0 0 ${star.size * 4}px ${star.size}px var(--particle-soft-glow),
+                     0 0 ${star.size * 8}px ${star.size * 3}px var(--particle-glow)`
+                  : `0 0 ${star.size * 2}px var(--particle-soft-glow)`,
               }}
             />
           ))}

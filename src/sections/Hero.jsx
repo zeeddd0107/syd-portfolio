@@ -39,7 +39,7 @@ function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[90vh] items-center overflow-hidden py-12"
+      className="relative flex min-h-[90vh] items-center overflow-hidden py-12 transition-colors duration-200"
     >
       {/* Galaxy background — sits behind all content via -z-10 */}
       <HeroBackground />
@@ -54,7 +54,7 @@ function Hero() {
           {/* Subtle Accent Label */}
           <motion.span
             variants={itemVariants}
-            className="text-white text-sm font-semibold tracking-[0.2em] uppercase mb-4"
+            className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-(--text-body) transition-colors duration-200"
           >
             Hello World, I'm
           </motion.span>
@@ -79,7 +79,7 @@ function Hero() {
                 },
               },
             }}
-            className="mb-4 text-4xl font-extrabold tracking-tight text-accent drop-shadow-[0_0_18px_rgba(0,255,153,0.12)] sm:text-5xl md:text-6xl"
+            className="mb-4 text-4xl font-extrabold tracking-tight text-(--text-accent-strong) transition-colors duration-200 sm:text-5xl md:text-6xl"
           >
             {siteConfig.name}
           </motion.h1>
@@ -87,18 +87,18 @@ function Hero() {
           {/* Professional Title */}
           <motion.h2
             variants={itemVariants}
-            className="text-xl sm:text-2xl font-semibold text-primary mb-6"
+            className="mb-6 text-xl font-semibold text-(--text-heading) transition-colors duration-200 sm:text-2xl"
           >
             <TypewriterEffect
               phrases={siteConfig.titles}
-              cursorClassName="ml-1 md:ml-2 w-0.75 h-6 sm:h-4 md:h-4 lg:h-7 bg-accent align-top"
+              cursorClassName="ml-1 md:ml-2 w-0.75 h-6 sm:h-4 md:h-4 lg:h-7 align-top"
             />
           </motion.h2>
 
           {/* Bio Description */}
           <motion.p
             variants={itemVariants}
-            className="text-body text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8"
+            className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-(--text-body) transition-colors duration-200 sm:text-lg lg:mx-0"
           >
             {siteConfig.bio}
           </motion.p>
@@ -110,14 +110,14 @@ function Hero() {
           >
             <a
               href="#projects"
-              className="w-full sm:w-auto bg-accent text-bg-dark px-8 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity cursor-pointer"
+              className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-(--button-primary-bg) px-8 py-3 font-semibold text-(--button-primary-text) transition-all duration-200 hover:opacity-90 sm:w-auto"
             >
               View Projects <ArrowRight size={18} />
             </a>
             <a
               href={siteConfig.resumeUrl}
               download
-              className="w-full sm:w-auto border border-border-accent text-accent px-8 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-accent/5 transition-all duration-300 cursor-pointer"
+              className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-(--button-secondary-border) bg-(--button-secondary-bg) px-8 py-3 font-semibold text-(--text-accent-strong) transition-all duration-200 hover:bg-(--button-secondary-hover) sm:w-auto"
             >
               Download Resume <Download size={18} />
             </a>
@@ -140,20 +140,20 @@ function Hero() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-zinc-500 hover:text-accent transition-colors duration-300"
+                    className="text-(--text-muted) transition-colors duration-200 hover:text-(--text-accent-strong)"
                     aria-label={link.name}
                   >
                     <Icon size={22} />
                   </a>
 
                   {/* Tooltip Container */}
-                  <div className="absolute bottom-full mb-2 flex flex-col items-center opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-30">
+                  <div className="absolute bottom-full mb-2 flex flex-col items-center opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 z-30">
                     {/* Tooltip Bubble */}
-                    <span className="bg-bg-elevated text-white text-xs font-medium px-2.5 py-1 rounded-md border border-border-subtle whitespace-nowrap shadow-md">
+                    <span className="whitespace-nowrap rounded-md border border-border-subtle bg-bg-elevated px-2.5 py-1 text-xs font-medium text-(--text-heading) shadow-md transition-colors duration-200">
                       {link.name}
                     </span>
                     {/* Tooltip Arrow */}
-                    <div className="w-1.5 h-1.5 bg-bg-elevated border-r border-b border-border-subtle rotate-45 -mt-1" />
+                    <div className="-mt-1 h-1.5 w-1.5 rotate-45 border-r border-b border-border-subtle bg-bg-elevated transition-colors duration-200" />
                   </div>
                 </div>
               );
@@ -170,7 +170,7 @@ function Hero() {
           <motion.div
             whileHover={{ y: -8 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-2xl bg-bg-card border border-border-accent p-3 shadow-glow"
+            className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-2xl bg-(--avatar-surface) border border-(--avatar-border) p-3 shadow-[0_0_40px_var(--avatar-glow)]"
           >
             {/* Background design accents */}
             <div className="absolute inset-0 bg-linear-to-tr from-accent/5 to-transparent rounded-2xl pointer-events-none" />

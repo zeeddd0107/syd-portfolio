@@ -26,7 +26,7 @@ function Projects() {
 
           <ScrollFloat
             containerClassName="mt-3 mb-2 w-full text-center sm:mt-4 md:mt-2"
-            textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight"
+            textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-(--text-heading) tracking-tight leading-tight"
             stagger={0.02}
             ease="power2.out"
             scrollStart="top bottom"
@@ -39,7 +39,7 @@ function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-            className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-body sm:text-base md:text-lg"
+            className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-(--text-body) sm:text-base md:text-lg"
           >
             A cross-section of platforms, tools, and architectures — from
             passion projects to polished applications.

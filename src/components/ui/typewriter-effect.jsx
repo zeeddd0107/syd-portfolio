@@ -100,7 +100,7 @@ export function TypewriterEffect({ phrases, className, cursorClassName }) {
             repeatType: "reverse",
           }}
           className={cn(
-            "inline-block rounded-sm w-1 h-4 md:h-6 lg:h-8 bg-accent vertical-middle align-middle",
+            "inline-block rounded-sm w-1 h-4 md:h-6 lg:h-8 bg-(--text-accent-strong) vertical-middle align-middle",
             cursorClassName,
           )}
         />

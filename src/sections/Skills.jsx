@@ -93,7 +93,7 @@ function Skills() {
         {/* Animated Heading using ScrollFloat */}
         <ScrollFloat
           containerClassName="mt-3 mb-2 w-full text-center sm:mt-4 md:mt-2"
-          textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight"
+          textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-(--text-heading) tracking-tight leading-tight"
           stagger={0.02}
           ease="power2.out"
           scrollStart="top bottom"
@@ -157,7 +157,7 @@ function Skills() {
                         ? "translateY(-6px) scale(1.03)"
                         : "translateY(0) scale(1)",
                     }}
-                    className="group group/spotlight relative overflow-hidden bg-[#111211] border backdrop-blur-md rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center w-32 h-32 sm:w-48 sm:h-48 shrink-0 transition-all duration-300"
+                    className="group group/spotlight relative overflow-hidden bg-(--surface-card) border backdrop-blur-md rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center w-32 h-32 sm:w-48 sm:h-48 shrink-0 transition-all duration-300"
                   >
                     <SpotlightLayer />
                     {/* Brand Logo - ALWAYS Colored */}
@@ -177,7 +177,7 @@ function Skills() {
                     </div>
 
                     {/* Skill Name */}
-                    <span className="relative z-10 font-semibold text-sm sm:text-lg text-zinc-300 group-hover:text-white mt-3 sm:mt-4 px-2 transition-colors duration-300 truncate w-full pointer-events-none">
+                    <span className="relative z-10 font-semibold text-sm sm:text-lg text-(--text-heading) group-hover:text-white mt-3 sm:mt-4 px-2 transition-colors duration-300 truncate w-full pointer-events-none">
                       {skill.name}
                     </span>
                   </div>

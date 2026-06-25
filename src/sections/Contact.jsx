@@ -98,7 +98,7 @@ function Contact() {
 
           <ScrollFloat
             containerClassName="mt-3 w-full text-center"
-            textClassName="text-[clamp(2rem,8vw,3.75rem)] font-extrabold leading-tight tracking-tight text-white"
+            textClassName="text-[clamp(2rem,8vw,3.75rem)] font-extrabold leading-tight tracking-tight text-(--text-heading)"
             stagger={0.02}
             ease="power2.out"
             scrollStart="top bottom"
@@ -111,7 +111,7 @@ function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.16, ease: "easeOut" }}
-            className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-body sm:text-base md:text-lg"
+            className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-(--text-body) sm:text-base md:text-lg"
           >
             I'm always open to new opportunities and meaningful collaborations.
             If you think I'd be a great fit for your team, I'd be happy to hear
@@ -127,7 +127,7 @@ function Contact() {
         >
           <aside
             onMouseMove={handleSpotlightMove}
-            className="group/spotlight relative overflow-hidden rounded-3xl border border-border-subtle bg-[#111211]/90 p-6 backdrop-blur-md sm:p-8"
+            className="group/spotlight relative overflow-hidden rounded-3xl border border-border-subtle bg-(--surface-card) p-6 backdrop-blur-md sm:p-8"
           >
             <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/spotlight:opacity-3 bg-[radial-gradient(circle_at_var(--mouse-x)_var(--mouse-y),rgb(225,250,240),transparent_40%)]" />
             <div className="relative z-10">
@@ -135,18 +135,18 @@ function Contact() {
                 Get in touch
               </p>
 
-              <h3 className="mt-4 text-2xl font-bold text-white">
+              <h3 className="mt-4 text-2xl font-bold text-(--text-heading)">
                 Let's turn an idea into something useful.
               </h3>
 
-              <p className="mt-4 text-sm leading-7 text-body sm:text-base">
+              <p className="mt-4 text-sm leading-7 text-(--field-text) sm:text-base">
                 The fastest way is email. I reply within a working day.
               </p>
 
               <div className="mt-8 space-y-3">
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-white/5 p-4 transition-colors duration-300 hover:border-accent/50"
+                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-(--surface-hover) p-4 transition-colors duration-300 hover:border-accent/50"
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
                     <Mail size={20} aria-hidden="true" />
@@ -166,7 +166,7 @@ function Contact() {
                   href={siteConfig.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-white/5 p-4 transition-colors duration-300 hover:border-accent/50"
+                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-(--surface-hover) p-4 transition-colors duration-300 hover:border-accent/50"
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
                     <GithubIcon size={20} aria-hidden="true" />
@@ -186,7 +186,7 @@ function Contact() {
                   href={siteConfig.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-white/5 p-4 transition-colors duration-300 hover:border-accent/50"
+                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-(--surface-hover) p-4 transition-colors duration-300 hover:border-accent/50"
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
                     <LinkedinIcon size={20} aria-hidden="true" />
@@ -207,7 +207,7 @@ function Contact() {
 
           <form
             onMouseMove={handleSpotlightMove}
-            className="group/spotlight relative overflow-hidden rounded-3xl border border-border-subtle bg-[#111211]/90 p-6 backdrop-blur-md sm:p-8"
+            className="group/spotlight relative overflow-hidden rounded-3xl border border-border-subtle bg-(--surface-card) p-6 backdrop-blur-md sm:p-8"
             onSubmit={handleSubmit}
           >
             <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/spotlight:opacity-3 bg-[radial-gradient(circle_at_var(--mouse-x)_var(--mouse-y),rgb(225,250,240),transparent_40%)]" />
@@ -217,7 +217,7 @@ function Contact() {
                   Send a message
                 </p>
 
-                <h3 className="mt-4 text-2xl font-bold text-white">
+                <h3 className="mt-4 text-2xl font-bold text-(--text-heading)">
                   Let's start the conversation.
                 </h3>
               </div>
@@ -226,7 +226,7 @@ function Contact() {
                 <div>
                   <label
                     htmlFor="contact-name"
-                    className="mb-2 block text-sm font-medium text-white"
+                    className="mb-2 block text-sm font-medium text-(--text-muted)"
                   >
                     Name
                   </label>
@@ -239,14 +239,14 @@ function Contact() {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Your name"
-                    className="w-full rounded-2xl border border-border-subtle bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-zinc-500 focus:border-accent/70"
+                    className="w-full rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--field-text) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-accent/70"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="contact-email"
-                    className="mb-2 block text-sm font-medium text-white"
+                    className="mb-2 block text-sm font-medium text-(--text-muted)"
                   >
                     Email
                   </label>
@@ -259,7 +259,7 @@ function Contact() {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="you@example.com"
-                    className="w-full rounded-2xl border border-border-subtle bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-zinc-500 focus:border-accent/70"
+                    className="w-full rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--field-text) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-accent/70"
                   />
                 </div>
               </div>
@@ -267,7 +267,7 @@ function Contact() {
               <div className="mt-5">
                 <label
                   htmlFor="contact-subject"
-                  className="mb-2 block text-sm font-medium text-white"
+                  className="mb-2 block text-sm font-medium text-(--text-muted)"
                 >
                   Subject
                 </label>
@@ -279,14 +279,14 @@ function Contact() {
                   value={formData.subject}
                   onChange={handleInputChange}
                   placeholder="Project, opportunity, or collaboration"
-                  className="w-full rounded-2xl border border-border-subtle bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-zinc-500 focus:border-accent/70"
+                  className="w-full rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--field-text) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-accent/70"
                 />
               </div>
 
               <div className="mt-5">
                 <label
                   htmlFor="contact-message"
-                  className="mb-2 block text-sm font-medium text-white"
+                  className="mb-2 block text-sm font-medium text-(--text-muted)"
                 >
                   Message
                 </label>
@@ -298,7 +298,7 @@ function Contact() {
                   value={formData.message}
                   onChange={handleInputChange}
                   placeholder="Tell me about your idea..."
-                  className="min-h-40 w-full resize-y rounded-2xl border border-border-subtle bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-zinc-500 focus:border-accent/70"
+                  className="min-h-40 w-full resize-y rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--field-text) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-accent/70"
                 />
               </div>
 

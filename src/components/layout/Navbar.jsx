@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, Moon, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { siteConfig } from "@/constants/siteConfig";
 
-function Navbar() {
+function Navbar({ theme, onToggleTheme }) {
   const [isOpen, setIsOpen] = useState(false); // Controls mobile menu open/close
   const [isScrolled, setIsScrolled] = useState(false); // Adds shadow/blur when user scrolls down
   const [activeSection, setActiveSection] = useState("#home"); // Tracks current active page section
@@ -92,8 +92,8 @@ function Navbar() {
         isVisible ? "translate-y-0" : "-translate-y-24"
       } ${
         isScrolled
-          ? "bg-bg-dark/80 backdrop-blur-md border border-border-subtle shadow-md"
-          : "bg-bg-dark/60 backdrop-blur-md border border-border-subtle"
+          ? "border border-(--button-secondary-border) bg-(--button-secondary-bg) shadow-(--surface-navbar-shadow) backdrop-blur-md"
+          : "border border-(--button-secondary-border) bg-(--button-secondary-bg) shadow-(--surface-navbar-shadow) backdrop-blur-md"
       }`}
     >
       <div className="flex items-center justify-center gap-3 px-3 py-2 rounded-full">
@@ -104,10 +104,10 @@ function Navbar() {
               key={link.label}
               href={link.href}
               onClick={() => handleNavClick(link.href)}
-              className={`rounded-full px-4 py-2 text-sm font-medium tracking-wide transition-all duration-300 ${
+              className={`rounded-full px-4 py-2 text-sm font-medium tracking-wide transition-all duration-200 ${
                 activeSection === link.href
-                  ? "bg-accent/10 text-accent shadow-[inset_0_0_0_1px_rgba(0,255,153,0.25)]"
-                  : "text-zinc-400 hover:bg-white/5 hover:text-white"
+                  ? "bg-(--button-secondary-hover) text-(--text-accent-strong) shadow-[inset_0_0_0_1px_var(--button-secondary-border)]"
+                  : "text-(--text-muted) hover:bg-(--surface-hover) hover:text-(--text-heading)"
               }`}
             >
               {link.label}
@@ -115,25 +115,53 @@ function Navbar() {
           ))}
         </div>
 
-        {/* Theme Toggle Placeholder — functionality will be added later */}
+        {/* Theme Toggle */}
         <button
           type="button"
-          aria-label="Theme toggle coming soon"
-          aria-disabled="true"
-          title="Theme toggle coming soon"
-          className="flex h-9 w-16 items-center justify-between rounded-full border border-border-subtle bg-white/5 px-1.5 text-zinc-300 opacity-80 cursor-not-allowed"
+          onClick={onToggleTheme}
+          aria-label={
+            theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+          }
+          title={
+            theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+          }
+          className="relative flex h-9 w-[4.35rem] items-center rounded-full border border-(--button-secondary-border) bg-(--toggle-track) px-1.5 shadow-inner transition-colors duration-200 hover:border-(--text-accent-strong) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
           <span
             aria-hidden="true"
-            className="h-6 w-6 rounded-full bg-accent/70 shadow-sm"
+            className={`absolute left-1.5 h-7 w-7 rounded-full bg-(--text-accent-strong) shadow-[0_4px_12px_rgba(0,0,0,0.22)] transition-transform duration-300 ease-out ${
+              theme === "light" ? "translate-x-8" : "translate-x-0"
+            }`}
           />
-          <Moon size={15} aria-hidden="true" />
+
+          <span className="relative z-10 flex w-full items-center justify-between px-1">
+            {theme === "light" ? (
+              <Sun
+                size={15}
+                aria-hidden="true"
+                className="text-(--text-heading)"
+              />
+            ) : (
+              <span className="h-3.75 w-3.75" aria-hidden="true" />
+            )}
+
+            {theme === "dark" ? (
+              <Moon
+                size={15}
+                aria-hidden="true"
+                className="text-(--text-heading)"
+              />
+            ) : (
+              <span className="h-3.75 w-3.75" aria-hidden="true" />
+            )}
+          </span>
         </button>
 
         {/* Mobile Hamburger Toggle Button */}
         <button
+          type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex h-9 w-9 items-center justify-center rounded-full text-white hover:bg-white/5 hover:text-accent transition-colors cursor-pointer"
+          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-(--text-heading) transition-colors duration-200 hover:bg-(--surface-hover) hover:text-(--text-accent-strong) md:hidden"
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isOpen}
         >
@@ -152,8 +180,8 @@ function Navbar() {
                 onClick={() => handleNavClick(link.href)}
                 className={`rounded-xl px-4 py-3 text-center text-base font-medium tracking-wide transition-all duration-300 ${
                   activeSection === link.href
-                    ? "bg-accent/10 text-accent"
-                    : "text-zinc-400 hover:bg-white/5 hover:text-white"
+                    ? "bg-(--button-secondary-hover) text-(--text-accent-strong)"
+                    : "text-(--text-heading) hover:bg-(--surface-hover) hover:text-(--text-accent-strong)"
                 }`}
               >
                 {link.label}
