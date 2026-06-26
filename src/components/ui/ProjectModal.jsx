@@ -88,16 +88,16 @@ function ProjectModal({ project, onClose }) {
         <motion.div
           ref={modalRef}
           onClick={(event) => event.stopPropagation()}
-          className="relative flex max-h-[86vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-border-subtle bg-[#121111] shadow-2xl sm:max-h-[88vh]"
+          className="relative flex max-h-[86vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-(--technology-tile-border) bg-(--surface-card) shadow-2xl sm:max-h-[88vh]"
           initial={{ opacity: 0, y: 30, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 30, scale: 0.98 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
         >
-          <div className="sticky top-0 z-20 flex items-center justify-between border-b border-border-subtle bg-[#121111] px-5 py-4 backdrop-blur-md sm:px-8 sm:py-5">
+          <div className="sticky top-0 z-20 flex items-center justify-between border-b border-(--technology-tile-border) bg-(--surface-card) px-5 py-4 backdrop-blur-md sm:px-8 sm:py-5">
             <h3
               id="project-modal-title"
-              className="text-2xl font-bold text-accent sm:text-3xl"
+              className="text-2xl font-bold text-(--text-accent-strong) sm:text-3xl"
             >
               {title}
             </h3>
@@ -109,7 +109,7 @@ function ProjectModal({ project, onClose }) {
                 onClose();
               }}
               aria-label="Close project details"
-              className="rounded-full p-2 text-zinc-400 transition-colors duration-300 hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              className="rounded-full p-2 text-(--text-muted) transition-colors duration-300 hover:bg-(--surface-hover) hover:text-(--text-heading) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
               <X size={22} aria-hidden="true" />
             </button>
@@ -119,7 +119,7 @@ function ProjectModal({ project, onClose }) {
             ref={contentRef}
             className="overflow-y-auto overscroll-contain p-5 sm:p-8"
           >
-            <div className="relative overflow-hidden rounded-2xl border border-border-subtle bg-bg-elevated">
+            <div className="relative overflow-hidden rounded-2xl border border-(--technology-tile-border) bg-bg-elevated">
               {activeImage ? (
                 <>
                   <img
@@ -143,7 +143,7 @@ function ProjectModal({ project, onClose }) {
                         type="button"
                         onClick={showNextImage}
                         aria-label="Show next project image"
-                        className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md transition-colors duration-300 hover:bg-black/80 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                        className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md transition-colors duration-300 hover:bg-black/80 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                       >
                         <ChevronRight size={22} aria-hidden="true" />
                       </button>
@@ -157,8 +157,8 @@ function ProjectModal({ project, onClose }) {
                             aria-label={`Show project image ${index + 1}`}
                             className={`h-2.5 w-2.5 rounded-full transition-colors duration-300 ${
                               activeImageIndex === index
-                                ? "bg-accent"
-                                : "bg-white/40 hover:bg-white/70"
+                                ? "bg-(--text-accent-strong)"
+                                : "bg-(--text-muted) opacity-50 hover:bg-(--text-accent-strong) hover:opacity-100"
                             }`}
                           />
                         ))}
@@ -172,9 +172,9 @@ function ProjectModal({ project, onClose }) {
                   aria-label={
                     imageAlt || `${title} project preview placeholder`
                   }
-                  className="flex aspect-video w-full items-center justify-center bg-linear-to-br from-accent/10 via-bg-card to-bg-dark"
+                  className="flex aspect-video w-full items-center justify-center bg-linear-to-br from-accent/10 via-(--surface-card) to-bg-dark"
                 >
-                  <span className="text-sm font-medium tracking-wide text-zinc-500">
+                  <span className="text-sm font-medium tracking-wide text-(--text-muted)">
                     Project preview coming soon
                   </span>
                 </div>
@@ -182,7 +182,7 @@ function ProjectModal({ project, onClose }) {
             </div>
 
             <div className="mt-8">
-              <p className="max-w-4xl text-sm leading-7 text-body sm:text-base sm:leading-8">
+              <p className="max-w-4xl text-sm leading-7 text-(--text-body) sm:text-base sm:leading-8">
                 {description}
               </p>
 
@@ -193,7 +193,7 @@ function ProjectModal({ project, onClose }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`View ${title} GitHub repository`}
-                    className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white/5 px-4 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:border-accent/50 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    className="inline-flex items-center gap-2 rounded-full border border-(--technology-tile-border) bg-(--button-secondary-bg) px-4 py-2 text-sm font-semibold text-(--text-heading) transition-colors duration-300 hover:border-(--text-accent-strong) hover:bg-(--button-secondary-hover) hover:text-(--text-accent-strong) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                   >
                     <GithubIcon size={17} aria-hidden="true" />
                     View Code
@@ -206,7 +206,7 @@ function ProjectModal({ project, onClose }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Visit ${title} live site`}
-                    className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-bg-dark transition-colors duration-300 hover:bg-accent/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    className="inline-flex items-center gap-2 rounded-full bg-(--button-primary-bg) px-4 py-2 text-sm font-semibold text-(--button-primary-text) transition-colors duration-300 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                   >
                     <ExternalLink size={17} aria-hidden="true" />
                     Live Demo
@@ -214,8 +214,8 @@ function ProjectModal({ project, onClose }) {
                 )}
               </div>
 
-              <div className="mt-10 border-t border-border-subtle pt-8">
-                <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500">
+              <div className="mt-10 border-t border-(--technology-tile-border) pt-8">
+                <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-(--text-muted)">
                   Built With
                 </p>
 
@@ -233,7 +233,7 @@ function ProjectModal({ project, onClose }) {
                         key={technology}
                         onMouseEnter={() => setHoveredTechnology(technology)}
                         onMouseLeave={() => setHoveredTechnology(null)}
-                        className="group flex flex-col items-center justify-center gap-2 text-sm font-medium text-zinc-300 transition-colors duration-300 hover:text-white"
+                        className="group flex flex-col items-center justify-center gap-2 text-sm font-medium text-(--text-body) transition-colors duration-300 hover:text-(--text-accent-strong)"
                       >
                         <span
                           style={{
@@ -257,7 +257,7 @@ function ProjectModal({ project, onClose }) {
                             <IconComponent
                               size={36}
                               aria-hidden="true"
-                              className="text-white"
+                              className="text-(--technology-mono-icon)"
                             />
                           )}
                         </span>

@@ -40,12 +40,15 @@
   --surface-navbar-shadow: 0 14px 38px rgba(0, 0, 0, 0.28);
   --surface-card: #111211;
   --surface-hover: rgba(255, 255, 255, 0.05);
+  --technology-tile-border: rgba(255, 255, 255, 0.14);
 
   /* Text */
   --text-heading: #FFFFFF;
   --text-body: #E7E7E7;
   --text-muted: #A1A1AA;
   --text-accent-strong: #00FF99;
+  --technology-mono-icon: #FFFFFF;
+  --technology-mono-glow: rgba(255, 255, 255, 0.18);
 
   /* Form fields */
   --field-bg: #1A1A1A;
@@ -90,12 +93,15 @@
   --surface-navbar-shadow: 0 20px 40px rgba(54, 49, 40, 0.28);
   --surface-card: #FFF9EA;
   --surface-hover: rgba(82, 67, 44, 0.06);
+  --technology-tile-border: rgba(82, 67, 44, 0.28);
 
   /* Text */
   --text-heading: #211D18;
   --text-body: #4C4338;
   --text-muted: #6F6354;
   --text-accent-strong: #008C5A;
+  --technology-mono-icon: #211D18;
+  --technology-mono-glow: rgba(33, 29, 24, 0.02);
 
   /* Form fields */
   --field-bg: #FFFDF4;

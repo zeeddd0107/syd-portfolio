@@ -12,7 +12,7 @@ function Projects() {
     <section id="projects" className="relative overflow-hidden py-24">
       <HeroBackground />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 md:translate-x-5 md:px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-6">
         <div className="mb-10 text-center">
           <motion.span
             initial={{ opacity: 0, y: 15 }}

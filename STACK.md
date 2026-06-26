@@ -22,7 +22,7 @@ This document explains the technologies, libraries, and architecture patterns us
 | `@tailwindcss/vite` | Vite plugin | Tailwind v4 compiler integration |
 | Poppins | Typography | Global sans-serif font |
 
-Design tokens live in [globals.css](./src/styles/globals.css). Component-level one-off values are used sparingly when a surface needs tuned contrast, such as project and modal cards using `#121111`.
+Design tokens live in [globals.css](./src/styles/globals.css). The app uses root-level CSS variables for dark/light theme support, with `data-theme` applied to the document element from React state.
 
 ---
 
@@ -73,13 +73,16 @@ Design tokens live in [globals.css](./src/styles/globals.css). Component-level o
 - Scroll direction determines Navbar visibility.
 - A navigation lock prevents anchor-link clicks from being treated as manual downward scrolling.
 - Active section tracking reads rendered section offsets from the nav link hashes.
-- The theme toggle is present as a placeholder only.
+- The theme toggle switches between dark and light mode.
+- The selected theme is saved in `localStorage`.
+- Navbar colors, shadows, mobile dropdown visibility, and toggle icons read from theme variables.
 
 ### Hero
 
 - `siteConfig.name` renders as the stable `<h1>`.
 - `siteConfig.titles` powers the subtitle `TypewriterEffect`.
-- `HeroBackground` is the shared parallax star field used by Hero, Skills, and Projects.
+- `HeroBackground` is the shared parallax star field used by Hero, Skills, Projects, Contact, and Footer.
+- `HeroBackground` reads particle color variables so dark mode and light mode feel related without using identical particles.
 - The app uses a full-width `<main>` and section-level inner wrappers for alignment.
 
 ### Skills
@@ -91,6 +94,7 @@ Design tokens live in [globals.css](./src/styles/globals.css). Component-level o
 - Cards use brand-colored border/glow hover styles.
 - The carousel uses a CSS mask fade instead of dark overlay divs.
 - Skill cards also use the shared spotlight hover layer.
+- Skills tiles use theme-aware secondary surfaces, shared border variables, and mono-icon variables so Express/GitHub-style icons remain readable in both themes.
 
 ### Projects
 
@@ -102,6 +106,7 @@ Design tokens live in [globals.css](./src/styles/globals.css). Component-level o
   - title, description, technology pills
   - View button
   - shared cursor-following spotlight layer
+  - clamped descriptions so previews stay compact
 - `Projects.jsx` owns selected-project state and renders `ProjectModal`.
 - `ProjectModal` is detail-focused:
   - body scroll lock
@@ -111,6 +116,7 @@ Design tokens live in [globals.css](./src/styles/globals.css). Component-level o
   - optional multi-image gallery with arrows and dots
   - GitHub and optional Live Demo actions
   - technology logo list
+  - theme-aware image borders, action borders, carousel controls, and mono technology icons
 
 ### Contact
 
@@ -122,6 +128,23 @@ Design tokens live in [globals.css](./src/styles/globals.css). Component-level o
 - Real email sending is intentionally deferred.
 - `Toast.jsx` provides top-right feedback for success and error states.
 - Toast notifications auto-dismiss after 3 seconds and include an accessible dismiss button.
+
+### Theme System
+
+- `App.jsx` owns the `theme` state.
+- The selected theme is stored in `localStorage`.
+- `document.documentElement.dataset.theme` controls the active CSS variable set.
+- Components should prefer semantic variables such as:
+  - `--surface-card`
+  - `--surface-hover`
+  - `--text-heading`
+  - `--text-body`
+  - `--text-muted`
+  - `--text-accent-strong`
+  - `--button-primary-bg`
+  - `--button-secondary-bg`
+  - `--technology-tile-border`
+- Tailwind v4 variable shorthand such as `bg-(--surface-card)` and `text-(--text-heading)` is valid in this codebase.
 
 ### Footer
 

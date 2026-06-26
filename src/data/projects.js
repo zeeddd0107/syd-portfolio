@@ -37,7 +37,7 @@ export const projects = [
     id: 'devtrack',
     title: 'DevTrack',
     description:
-      'A focused dashboard concept for organizing development tasks, learning goals, and project milestones in one place.',
+      'A focused dashboard concept for organizing development tasks, learning goals, and project milestones in one place. ',
     technologies: ['React', 'Tailwind CSS', 'Node.js'],
     githubUrl: null,
     liveUrl: null,

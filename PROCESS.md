@@ -60,7 +60,10 @@ This document records the build process, decisions, and phase outcomes for the P
   - anchor navigation keeps it visible
 - Added data-driven active-section tracking.
 - Added responsive mobile dropdown.
-- Added placeholder-only theme toggle UI with accessible labeling.
+- Added accessible theme toggle UI.
+- Connected the toggle to real dark/light mode state in `App.jsx`.
+- Persisted the selected theme in `localStorage`.
+- Updated the Navbar to adapt its surfaces, shadows, toggle icons, and mobile dropdown colors between themes.
 - Removed the Experience tab for now because the section is deferred.
 - Footer is now implemented and rendered after the Contact section.
 
@@ -111,6 +114,10 @@ Key decision:
 - Replaced hard overlay fades with a CSS mask fade so cards fade naturally without black edge blocks.
 - Tuned mobile spacing and right padding.
 - Updated skill card surface color for a more consistent dark card look.
+- Updated Skills technology tiles to use theme-aware secondary surfaces.
+- Added stronger but subtle borders to technology tiles.
+- Made monochrome technology icons adapt between white in dark mode and black in light mode.
+- Reduced desktop tile padding for better balance.
 
 Key decision:
 
@@ -160,6 +167,11 @@ Key decision:
   - smaller mobile description and technology pills
   - modal left untouched after it was confirmed working well
 - Added the shared spotlight hover effect to Project cards using `SpotLightLayer.jsx` and `handleSpotlightMove`.
+- Clamped Project card descriptions so preview cards stay compact while full descriptions remain available inside the modal.
+- Applied shared themed border styling to Project cards, technology pills, and modal image frames.
+- Tuned modal carousel arrows, dots, and action buttons for theme readability.
+- Improved modal screenshot sizing so images remain visible and do not visually collide with the modal edges.
+- Fixed tablet-to-desktop project layout spacing so cards stay centered with balanced side padding.
 
 Key decisions:
 
@@ -167,6 +179,7 @@ Key decisions:
 - Optional `images` powers the modal gallery.
 - `githubUrl` stays in `projects.js` even when GitHub is not shown on the card.
 - Project detail actions belong in the modal, not the preview card.
+- Preview cards should summarize; detailed project explanations belong in the modal.
 
 ---
 
@@ -212,6 +225,42 @@ Key decisions:
 
 ---
 
+## Phase 10: Theme and Visual Polish
+
+- Added a working dark/light theme system:
+  - `App.jsx` owns theme state.
+  - `localStorage` remembers the selected theme.
+  - `data-theme` on the root document element activates the correct CSS variable set.
+- Changed the light theme direction to a warm cream background instead of plain gray.
+- Updated `HeroBackground` so particles become green in light mode.
+- Polished the Hero section for light mode:
+  - stronger readable accent for the name
+  - theme-aware body text
+  - theme-aware primary and secondary buttons
+  - cleaner social tooltip colors
+- Polished the Navbar for light mode:
+  - stronger glass surface
+  - darker shadow
+  - clearer mobile dropdown
+  - theme toggle with sun/moon behavior
+- Polished the Skills section:
+  - theme-aware technology tile surfaces
+  - shared border variables
+  - corrected monochrome icon color in light mode
+  - subtler hover glow for monochrome and SVG icons
+- Polished the Projects section:
+  - theme-aware card surfaces
+  - less aggressive hover glow
+  - Project card description clamping
+  - Project pill borders aligned with card borders
+  - modal image frame border aligned with card borders
+
+Key decision:
+
+- Theme styling should use semantic CSS variables instead of hardcoded one-off light/dark classes whenever possible.
+
+---
+
 ## Current State
 
 Completed:
@@ -230,6 +279,7 @@ Still pending:
 
 - Experience section
 - Real email sending integration
+- Remaining light-theme polish for Contact and Footer
 - Accessibility audit
 - Image optimization
 - Deployment

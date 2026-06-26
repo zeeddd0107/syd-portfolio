@@ -339,3 +339,83 @@ Invalid email keeps the fields filled and shows an error toast. Valid submit cle
 - success, error, warning, and info variants
 - X dismiss button
 - 3-second auto-dismiss handled from Contact submit logic
+
+---
+
+## 30. Tailwind CSS Variable Syntax Warning
+
+**Problem:** Tailwind suggested that `bg-[var(--surface-card)]` could be written as `bg-(--surface-card)`.
+
+**Cause:** Tailwind CSS v4 supports shorthand syntax for custom properties.
+
+**Solution:** Use the shorter Tailwind v4 syntax in this project:
+
+```jsx
+bg-(--surface-card)
+text-(--text-heading)
+border-(--technology-tile-border)
+```
+
+This keeps utility classes shorter while still reading from CSS variables.
+
+---
+
+## 31. Light Theme Needed Different Accent Strength
+
+**Problem:** The neon green used in dark mode looked like it was floating on the warm light background.
+
+**Cause:** Bright neon colors that work on black can feel disconnected on cream or off-white backgrounds.
+
+**Solution:** Added `--text-accent-strong` as a semantic variable:
+
+- dark mode uses the brighter neon accent
+- light mode uses a deeper green for better readability and visual grounding
+
+---
+
+## 32. Monochrome Technology Icons Were Invisible in Light Mode
+
+**Problem:** White-only icons such as GitHub, Express, and Expo became difficult to see on light cards.
+
+**Cause:** Their icon color was hardcoded for dark mode.
+
+**Solution:** Added `--technology-mono-icon`:
+
+- dark mode: white
+- light mode: dark text color
+
+Component icons now use:
+
+```jsx
+className="text-(--technology-mono-icon)"
+```
+
+---
+
+## 33. Project Card Descriptions Became Too Long
+
+**Problem:** Project preview cards displayed full descriptions and pushed the card layout too tall.
+
+**Cause:** The same project description is used for both preview cards and modal details.
+
+**Solution:** Keep the full text in `projects.js`, but clamp it only in `ProjectCard.jsx`:
+
+- wide cards show up to two lines
+- standard cards show up to three lines
+- the modal still shows the full description
+
+---
+
+## 34. Project Modal Image Corners Showed Small Bottom Gaps
+
+**Problem:** The project screenshot showed tiny gaps at the bottom-left and bottom-right corners.
+
+**Cause:** The parent image frame was rounded and clipped, but the image itself did not match the same rounding/block behavior.
+
+**Solution:** Make the image a block element and match the frame radius:
+
+```jsx
+className="block aspect-video h-full w-full rounded-2xl object-cover"
+```
+
+If needed, `leading-none` can also be added to the image frame wrapper to remove inline spacing side effects.

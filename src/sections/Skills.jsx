@@ -85,7 +85,7 @@ function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="pt-25 text-center text-xs font-semibold uppercase tracking-[0.15em] text-accent sm:text-sm sm:tracking-[0.2em]"
+          className="pt-25 text-center text-xs font-semibold uppercase tracking-[0.15em] text-(--text-accent-strong) sm:text-sm sm:tracking-[0.2em] lg:text-base"
         >
           My Toolkit
         </motion.span>
@@ -148,21 +148,29 @@ function Skills() {
                     onMouseMove={handleSpotlightMove}
                     style={{
                       borderColor: isHovered
-                        ? `${skill.color}`
-                        : "rgba(255, 255, 255, 0.05)",
+                        ? skill.isSvgFile
+                          ? skill.color
+                          : "var(--technology-mono-icon)"
+                        : "var(--technology-tile-border)",
                       boxShadow: isHovered
-                        ? `0 0 30px ${skill.color}25`
+                        ? skill.isSvgFile
+                          ? `0 0 30px ${skill.color}10`
+                          : "0 0 30px var(--technology-mono-glow)"
                         : "none",
                       transform: isHovered
                         ? "translateY(-6px) scale(1.03)"
                         : "translateY(0) scale(1)",
                     }}
-                    className="group group/spotlight relative overflow-hidden bg-(--surface-card) border backdrop-blur-md rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center w-32 h-32 sm:w-48 sm:h-48 shrink-0 transition-all duration-300"
+                    className="group group/spotlight relative overflow-hidden bg-(--surface-card) border backdrop-blur-md rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center w-32 h-32 sm:w-44 sm:h-44 shrink-0 transition-all duration-300"
                   >
                     <SpotlightLayer />
                     {/* Brand Logo - ALWAYS Colored */}
                     <div
-                      style={{ color: skill.color }}
+                      style={{
+                        color: skill.isSvgFile
+                          ? skill.color
+                          : "var(--technology-mono-icon)",
+                      }}
                       className="relative z-10 transition-transform duration-300 group-hover:scale-105 pointer-events-none w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center"
                     >
                       {skill.isSvgFile ? (
@@ -177,7 +185,7 @@ function Skills() {
                     </div>
 
                     {/* Skill Name */}
-                    <span className="relative z-10 font-semibold text-sm sm:text-lg text-(--text-heading) group-hover:text-white mt-3 sm:mt-4 px-2 transition-colors duration-300 truncate w-full pointer-events-none">
+                    <span className="relative z-10 font-semibold text-sm sm:text-lg text-(--text-heading) group-hover:text-(--text-accent-strong) mt-3 sm:mt-4 px-2 transition-colors duration-300 truncate w-full pointer-events-none">
                       {skill.name}
                     </span>
                   </div>

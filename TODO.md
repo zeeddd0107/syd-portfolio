@@ -15,7 +15,7 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] **Phase 7:** Projects Section
 - [ ] **Phase 8:** Experience Section — deferred; Navbar tab hidden for now
 - [/] **Phase 9:** Contact Section — UI, validation, and toast feedback complete; real email sending deferred
-- [ ] **Phase 10:** Advanced Animations & Polish
+- [/] **Phase 10:** Advanced Animations & Polish — dark/light theme polish and responsive refinements in progress
 - [ ] **Phase 11:** 3D Elements (Optional)
 - [ ] **Phase 12:** Optimization & Accessibility
 - [ ] **Phase 13:** Deployment
@@ -59,7 +59,10 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] Keep Navbar visible during anchor-link navigation.
 - [x] Track active section from rendered `siteConfig.navLinks`.
 - [x] Add responsive mobile dropdown.
-- [x] Add accessible placeholder theme toggle UI.
+- [x] Add accessible theme toggle UI.
+- [x] Connect the theme toggle to working dark/light mode state.
+- [x] Persist the selected theme in `localStorage`.
+- [x] Apply theme variables through `data-theme` on the root document element.
 - [x] Hide the Experience tab while the section is deferred.
 - [x] Render Navbar inside `App.jsx`.
 - [x] Build and render Footer.
@@ -75,6 +78,8 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] Create brand-safe custom social icons.
 - [x] Build responsive Hero layout with Framer Motion entrance animations.
 - [x] Improve the Hero entrance animation while keeping the name stable.
+- [x] Polish Hero colors for light mode, including stronger readable accent text.
+- [x] Make Hero text and buttons use theme-aware variables.
 - [x] Build and render interactive `HeroBackground`.
 - [x] Convert the app layout so full-width sections own their backgrounds while inner content remains constrained.
 
@@ -95,6 +100,10 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] Constrain the carousel to `max-w-7xl`.
 - [x] Add masked carousel edge fading without dark overlay blocks.
 - [x] Tune skill card surface color.
+- [x] Make Skills technology tiles use the same themed surface language as the Navbar/secondary buttons.
+- [x] Add stronger but subtle tile borders.
+- [x] Make monochrome technology icons theme-aware.
+- [x] Reduce desktop Skills tile padding for better balance.
 - [x] Apply reusable spotlight hover effect to Skills cards.
 
 ### Phase 7: Projects Section
@@ -110,6 +119,11 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 - [x] Make the whole card clickable while keeping the View button.
 - [x] Remove direct GitHub button from the card while preserving `githubUrl` in data.
 - [x] Add card hover border/glow without scale enlargement.
+- [x] Clamp Project card descriptions so cards show previews only while the modal shows full detail.
+- [x] Apply shared themed border styling to Project cards, Project pills, and modal image frames.
+- [x] Tune modal carousel arrows and dots for dark/light theme readability.
+- [x] Improve modal image behavior so screenshots remain visible without touching or overlapping the modal edges.
+- [x] Improve Projects layout spacing between tablet and desktop widths.
 - [x] Apply reusable spotlight hover effect to Project cards.
 - [x] Build `ProjectModal.jsx` with sticky header, close button, scroll lock, and backdrop click-to-close.
 - [x] Prevent background page scroll while the modal is open.
@@ -160,6 +174,15 @@ This document tracks completed work, in-progress areas, and upcoming phases for 
 
 ### Phase 10: Advanced Animations & Polish
 
+- [x] Add working dark/light mode toggle.
+- [x] Add warm cream light theme background.
+- [x] Make `HeroBackground` particles adapt to the selected theme.
+- [x] Polish Hero light theme colors.
+- [x] Polish Navbar light theme colors, mobile menu contrast, and toggle behavior.
+- [x] Polish Skills light theme tiles, borders, icon colors, and hover states.
+- [/] Polish Projects light theme cards, modal, image borders, and technology pills.
+- [ ] Polish Contact light theme.
+- [ ] Polish Footer light theme.
 - [ ] Review animation density across Hero, Skills, Projects, and Contact.
 - [ ] Audit mobile spacing across all current sections.
 - [ ] Tune hover, focus, and reduced-motion behavior.
