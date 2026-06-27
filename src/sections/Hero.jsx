@@ -54,7 +54,7 @@ function Hero() {
           {/* Subtle Accent Label */}
           <motion.span
             variants={itemVariants}
-            className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-(--text-body) transition-colors duration-200"
+            className="mb-1 text-sm font-semibold uppercase tracking-[0.2em] text-(--text-body) transition-colors duration-200 lg:text-base"
           >
             Hello World, I'm
           </motion.span>

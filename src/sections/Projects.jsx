@@ -19,13 +19,13 @@ function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-xs font-semibold uppercase tracking-[0.15em] text-accent sm:text-sm sm:tracking-[0.2em]"
+            className="text-xs font-semibold uppercase tracking-[0.15em] text-(--text-accent-strong) sm:text-sm sm:tracking-[0.2em] lg:text-base"
           >
             What I've Built
           </motion.span>
 
           <ScrollFloat
-            containerClassName="mt-3 mb-2 w-full text-center sm:mt-4 md:mt-2"
+            containerClassName="mt-3 mb-2 w-full text-center sm:mt-4 md:mt-1"
             textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-(--text-heading) tracking-tight leading-tight"
             stagger={0.02}
             ease="power2.out"

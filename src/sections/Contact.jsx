@@ -91,13 +91,13 @@ function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-xs font-semibold uppercase tracking-[0.15em] text-accent sm:text-sm sm:tracking-[0.2em]"
+            className="text-xs font-semibold uppercase tracking-[0.15em] text-(--text-accent-strong) sm:text-sm sm:tracking-[0.2em] lg:text-base"
           >
             Contact
           </motion.span>
 
           <ScrollFloat
-            containerClassName="mt-3 w-full text-center"
+            containerClassName="mt-0 w-full text-center"
             textClassName="text-[clamp(2rem,8vw,3.75rem)] font-extrabold leading-tight tracking-tight text-(--text-heading)"
             stagger={0.02}
             ease="power2.out"
@@ -131,7 +131,7 @@ function Contact() {
           >
             <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/spotlight:opacity-3 bg-[radial-gradient(circle_at_var(--mouse-x)_var(--mouse-y),rgb(225,250,240),transparent_40%)]" />
             <div className="relative z-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-(--text-accent-strong)">
                 Get in touch
               </p>
 
@@ -139,24 +139,24 @@ function Contact() {
                 Let's turn an idea into something useful.
               </h3>
 
-              <p className="mt-4 text-sm leading-7 text-(--field-text) sm:text-base">
+              <p className="mt-4 text-sm leading-7 text-(--text-body) sm:text-base">
                 The fastest way is email. I reply within a working day.
               </p>
 
               <div className="mt-8 space-y-3">
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-(--surface-hover) p-4 transition-colors duration-300 hover:border-accent/50"
+                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-(--surface-hover) p-4 transition-colors duration-300 hover:bg-(--button-secondary-hover) hover:border-(--text-accent-strong) "
                 >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[color-mix(in_srgb,var(--text-accent-strong)_10%,transparent)] text-(--text-accent-strong)">
                     <Mail size={20} aria-hidden="true" />
                   </span>
 
                   <span>
-                    <span className="block text-sm font-semibold text-white">
+                    <span className="block text-sm font-semibold text-(--text-heading)">
                       Email
                     </span>
-                    <span className="block text-sm text-body transition-colors duration-300 group-hover/contact-link:text-accent">
+                    <span className="block text-sm text-(--text-body)">
                       {siteConfig.email}
                     </span>
                   </span>
@@ -166,17 +166,17 @@ function Contact() {
                   href={siteConfig.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-(--surface-hover) p-4 transition-colors duration-300 hover:border-accent/50"
+                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-(--surface-hover) p-4 transition-colors duration-300 hover:bg-(--button-secondary-hover) hover:border-(--text-accent-strong)"
                 >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[color-mix(in_srgb,var(--text-accent-strong)_10%,transparent)] text-(--text-accent-strong)">
                     <GithubIcon size={20} aria-hidden="true" />
                   </span>
 
                   <span>
-                    <span className="block text-sm font-semibold text-white">
+                    <span className="block text-sm font-semibold text-(--text-heading)">
                       GitHub
                     </span>
-                    <span className="block text-sm text-body transition-colors duration-300 group-hover/contact-link:text-accent">
+                    <span className="block text-sm text-(--text-body)">
                       zeeddd0107
                     </span>
                   </span>
@@ -186,17 +186,17 @@ function Contact() {
                   href={siteConfig.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-(--surface-hover) p-4 transition-colors duration-300 hover:border-accent/50"
+                  className="group/contact-link flex items-center gap-4 rounded-2xl border border-border-subtle bg-(--surface-hover) p-4 transition-colors duration-300 hover:bg-(--button-secondary-hover) hover:border-(--text-accent-strong)"
                 >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[color-mix(in_srgb,var(--text-accent-strong)_10%,transparent)] text-(--text-accent-strong)">
                     <LinkedinIcon size={20} aria-hidden="true" />
                   </span>
 
                   <span>
-                    <span className="block text-sm font-semibold text-white">
+                    <span className="block text-sm font-semibold text-(--text-heading)">
                       LinkedIn
                     </span>
-                    <span className="block text-sm text-body transition-colors duration-300 group-hover/contact-link:text-accent">
+                    <span className="block text-sm text-(--text-body)">
                       Sydney Jimenez
                     </span>
                   </span>
@@ -213,7 +213,7 @@ function Contact() {
             <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/spotlight:opacity-3 bg-[radial-gradient(circle_at_var(--mouse-x)_var(--mouse-y),rgb(225,250,240),transparent_40%)]" />
             <div className="relative z-10">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-(--text-accent-strong)">
                   Send a message
                 </p>
 
@@ -239,7 +239,7 @@ function Contact() {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Your name"
-                    className="w-full rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--field-text) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-accent/70"
+                    className="w-full rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--text-body) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-(--text-accent-strong)"
                   />
                 </div>
 
@@ -259,7 +259,7 @@ function Contact() {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="you@example.com"
-                    className="w-full rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--field-text) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-accent/70"
+                    className="w-full rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--text-body) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-(--text-accent-strong)"
                   />
                 </div>
               </div>
@@ -279,7 +279,7 @@ function Contact() {
                   value={formData.subject}
                   onChange={handleInputChange}
                   placeholder="Project, opportunity, or collaboration"
-                  className="w-full rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--field-text) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-accent/70"
+                  className="w-full rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--text-body) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-(--text-accent-strong)"
                 />
               </div>
 
@@ -298,13 +298,13 @@ function Contact() {
                   value={formData.message}
                   onChange={handleInputChange}
                   placeholder="Tell me about your idea..."
-                  className="min-h-40 w-full resize-y rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--field-text) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-accent/70"
+                  className="min-h-40 w-full resize-y rounded-2xl border border-border-subtle bg-(--field-bg) px-4 py-3 text-sm text-(--text-body) outline-none transition-colors duration-300 placeholder:text-(--field-placeholder) focus:border-(--text-accent-strong)"
                 />
               </div>
 
               <button
                 type="submit"
-                className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-accent px-6 py-3 text-sm font-bold text-bg-dark transition-opacity duration-300 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:w-auto"
+                className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-(--button-primary-bg) px-6 py-3 text-sm font-bold text-(--button-primary-text) transition-opacity duration-300 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--text-accent-strong) sm:w-auto"
               >
                 Send Message
               </button>

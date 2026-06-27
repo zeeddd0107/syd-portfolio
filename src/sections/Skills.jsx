@@ -92,7 +92,7 @@ function Skills() {
 
         {/* Animated Heading using ScrollFloat */}
         <ScrollFloat
-          containerClassName="mt-3 mb-2 w-full text-center sm:mt-4 md:mt-2"
+          containerClassName="mt-3 mb-2 w-full text-center sm:mt-4 md:mt-1"
           textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-(--text-heading) tracking-tight leading-tight"
           stagger={0.02}
           ease="power2.out"
