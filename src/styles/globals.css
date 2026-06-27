@@ -133,6 +133,9 @@ body {
   background-color: var(--color-bg-dark);
   color: var(--text-heading);
   font-family: var(--font-sans);
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -180,4 +183,10 @@ body {
 .scrollbar-none {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
 }

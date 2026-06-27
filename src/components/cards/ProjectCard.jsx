@@ -25,7 +25,6 @@ function ProjectCard({ project, onViewProject }) {
         borderColor: "var(--technology-tile-border)",
       }}
       whileHover={{
-        y: { duration: 0.25 },
         borderColor: "var(--text-accent-strong)",
         boxShadow: "0 0 18px rgba(0, 140, 90, 0.08)",
       }}
@@ -33,7 +32,6 @@ function ProjectCard({ project, onViewProject }) {
       transition={{
         duration: 0.6,
         ease: "easeOut",
-        y: { duration: 0.25 },
         borderColor: { duration: 0.25 },
         boxShadow: { duration: 0.25 },
       }}
@@ -63,7 +61,7 @@ function ProjectCard({ project, onViewProject }) {
       </div>
 
       <div className="relative z-10 flex flex-1 flex-col p-4 sm:p-6">
-        <h3 className="text-lg font-bold text-(--text-heading) transition-colors duration-300 group-hover:text-(--text-accent-strong) sm:text-2xl">
+        <h3 className="text-lg font-bold text-(--text-heading) transition-colors duration-200 group-hover:text-(--text-accent-strong) sm:text-2xl">
           {title}
         </h3>
 
@@ -87,7 +85,7 @@ function ProjectCard({ project, onViewProject }) {
             return (
               <li
                 key={technology}
-                className="flex items-center gap-1 rounded-full border border-(--technology-tile-border) bg-(--surface-hover) px-2.5 py-1 text-[0.7rem] font-medium text-(--text-body) transition-colors duration-300 sm:gap-1.5 sm:px-3 sm:text-xs"
+                className="flex items-center gap-1 rounded-full border border-(--technology-tile-border) bg-(--surface-hover) px-2.5 py-1 text-[0.7rem] font-medium text-(--text-body) transition-colors duration-200 sm:gap-1.5 sm:px-3 sm:text-xs"
               >
                 {icon?.type === "image" && (
                   <img
@@ -102,7 +100,7 @@ function ProjectCard({ project, onViewProject }) {
                   <IconComponent
                     size={14}
                     aria-hidden="true"
-                    className="text-(--technology-mono-icon)"
+                    className="text-(--technology-mono-icon) transition-colors duration-200"
                   />
                 )}
 
@@ -119,7 +117,7 @@ function ProjectCard({ project, onViewProject }) {
               onViewProject(project);
             }}
             aria-label={`View ${title} project details`}
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-(--text-muted) transition-colors duration-300 hover:text-(--text-accent-strong) focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-(--text-muted) transition-colors duration-200 hover:text-(--text-accent-strong) focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
           >
             View
             <ArrowUpRight size={16} aria-hidden="true" />

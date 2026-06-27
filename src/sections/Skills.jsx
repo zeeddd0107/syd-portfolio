@@ -75,7 +75,10 @@ function Skills() {
   };
 
   return (
-    <section id="skills" className="relative min-h-[50vh] overflow-hidden">
+    <section
+      id="skills"
+      className="relative min-h-[50vh] overflow-hidden transition-colors duration-200"
+    >
       <HeroBackground />
 
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 md:translate-x-5">
@@ -85,7 +88,7 @@ function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="pt-25 text-center text-xs font-semibold uppercase tracking-[0.15em] text-(--text-accent-strong) sm:text-sm sm:tracking-[0.2em] lg:text-base"
+          className="pt-25 text-center text-xs font-semibold uppercase tracking-[0.15em] text-(--text-accent-strong) sm:text-sm sm:tracking-[0.2em] lg:text-base transition-colors duration-200"
         >
           My Toolkit
         </motion.span>
@@ -93,7 +96,7 @@ function Skills() {
         {/* Animated Heading using ScrollFloat */}
         <ScrollFloat
           containerClassName="mt-3 mb-2 w-full text-center sm:mt-4 md:mt-1"
-          textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-(--text-heading) tracking-tight leading-tight"
+          textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-(--text-heading) tracking-tight leading-tight transition-colors duration-200"
           stagger={0.02}
           ease="power2.out"
           scrollStart="top bottom"
@@ -161,7 +164,7 @@ function Skills() {
                         ? "translateY(-6px) scale(1.03)"
                         : "translateY(0) scale(1)",
                     }}
-                    className="group group/spotlight relative overflow-hidden bg-(--surface-card) border backdrop-blur-md rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center w-32 h-32 sm:w-44 sm:h-44 shrink-0 transition-all duration-300"
+                    className="group group/spotlight relative overflow-hidden bg-(--surface-card) border backdrop-blur-md rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center w-32 h-32 sm:w-44 sm:h-44 shrink-0 transition-all duration-200"
                   >
                     <SpotlightLayer />
                     {/* Brand Logo - ALWAYS Colored */}
@@ -171,7 +174,7 @@ function Skills() {
                           ? skill.color
                           : "var(--technology-mono-icon)",
                       }}
-                      className="relative z-10 transition-transform duration-300 group-hover:scale-105 pointer-events-none w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center"
+                      className="relative z-10 transition-[color,transform] duration-200 group-hover:scale-105 pointer-events-none w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center"
                     >
                       {skill.isSvgFile ? (
                         <img
@@ -185,7 +188,7 @@ function Skills() {
                     </div>
 
                     {/* Skill Name */}
-                    <span className="relative z-10 font-semibold text-sm sm:text-lg text-(--text-heading) group-hover:text-(--text-accent-strong) mt-3 sm:mt-4 px-2 transition-colors duration-300 truncate w-full pointer-events-none">
+                    <span className="relative z-10 font-semibold text-sm sm:text-lg text-(--text-heading) group-hover:text-(--text-accent-strong) mt-3 sm:mt-4 px-2 transition-colors duration-200 truncate w-full pointer-events-none">
                       {skill.name}
                     </span>
                   </div>

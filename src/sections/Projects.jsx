@@ -9,7 +9,10 @@ import HeroBackground from "@/effects/HeroBackground";
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   return (
-    <section id="projects" className="relative overflow-hidden py-24">
+    <section
+      id="projects"
+      className="relative overflow-hidden py-24 transition-colors duration-200"
+    >
       <HeroBackground />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-6">
@@ -19,14 +22,14 @@ function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-xs font-semibold uppercase tracking-[0.15em] text-(--text-accent-strong) sm:text-sm sm:tracking-[0.2em] lg:text-base"
+            className="text-xs font-semibold uppercase tracking-[0.15em] text-(--text-accent-strong) sm:text-sm sm:tracking-[0.2em] lg:text-base transition-colors duration-200"
           >
             What I've Built
           </motion.span>
 
           <ScrollFloat
             containerClassName="mt-3 mb-2 w-full text-center sm:mt-4 md:mt-1"
-            textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-(--text-heading) tracking-tight leading-tight"
+            textClassName="text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-extrabold text-(--text-heading) tracking-tight leading-tight transition-colors duration-200"
             stagger={0.02}
             ease="power2.out"
             scrollStart="top bottom"
@@ -39,7 +42,7 @@ function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-            className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-(--text-body) sm:text-base md:text-lg"
+            className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-(--text-body) sm:text-base md:text-lg transition-colors duration-200"
           >
             A cross-section of platforms, tools, and architectures — from
             passion projects to polished applications.
