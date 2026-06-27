@@ -25,7 +25,7 @@ function ProjectCard({ project, onViewProject }) {
         borderColor: "var(--technology-tile-border)",
       }}
       whileHover={{
-        y: -6,
+        y: { duration: 0.25 },
         borderColor: "var(--text-accent-strong)",
         boxShadow: "0 0 18px rgba(0, 140, 90, 0.08)",
       }}
@@ -47,7 +47,7 @@ function ProjectCard({ project, onViewProject }) {
             alt={imageAlt}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover object-center transition-transform duration-500"
+            className="h-full w-full object-cover object-center transition-transform duration-600 ease-out group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none"
           />
         ) : (
           <div
